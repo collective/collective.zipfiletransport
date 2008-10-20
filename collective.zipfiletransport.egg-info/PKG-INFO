@@ -1,0 +1,27 @@
+Metadata-Version: 1.0
+Name: collective.zipfiletransport
+Version: 2.1.0dev-r73796
+Summary: This tool is used to import and export zip files.
+Home-page: http://plone.org/products/zipfiletransport
+Author: enPraxis
+Author-email: info@enpraxis.net
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        2.1.0 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Keywords: zipfile bulk upload
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

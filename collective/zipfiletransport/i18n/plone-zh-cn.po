@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ZipFile Transport Tool\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2008-11-01 20:24+0000\n"
 "PO-Revision-Date: 2007-09-03 21:57-0700\n"
 "Last-Translator: Chenyong(Jessie) Zhu <jessie0587@hotmail.com>\n"
 "Language-Team: Mark <gdzhao@gse.pku.edu.cn>\n"

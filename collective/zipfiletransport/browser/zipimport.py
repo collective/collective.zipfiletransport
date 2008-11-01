@@ -34,6 +34,7 @@ from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 import string
 
 
+
 class ImportFormAdapter(object):
     """ Adapter for the import form """
 
@@ -93,7 +94,7 @@ class ImportForm(EditForm):
     form_fields['filename'].custom_widget = FileWidget
 
     label = _(u'Import Content')
-    description = _(u"This form will import content from files contained in a .zip file, and will either create new objects")
+    description = _(u"This form will import content from files contained in a .zip file, and will create new objects")
 
     def __init__(self, context, request):
         self.context = context

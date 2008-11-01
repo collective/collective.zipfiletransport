@@ -3,7 +3,7 @@
    cookie_persistence="False" default_skin="Plone Default"
    request_varname="plone_skin">
  <object name="ZipFileTransport" meta_type="Filesystem Directory View"
-    directory="ZipFileTransport/skins/ZipFileTransport"/>
+    directory="collective.zipfiletransport:skins/ZipFileTransport"/>
  <skin-path name="*">
   <layer name="ZipFileTransport" insert-after="custom"/>
  </skin-path>

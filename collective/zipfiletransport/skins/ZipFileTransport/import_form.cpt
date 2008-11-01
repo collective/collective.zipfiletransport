@@ -7,12 +7,12 @@
     <div metal:fill-slot="main"
          tal:define="errors options/state/getErrors">
 	    
-      <h1 i18n:domain="ZipFileTransport" i18n:translate="heading_ImportContent">
+      <h1 i18n:domain="ZipFileTransport" i18n:translate="">
         Import Content
       </h1>
       <br />
       <p i18n:domain="ZipFileTransport"
-         i18n:translate="description_import_file">
+         i18n:translate="">
         This form will import content from files contained in a .zip file, and will either create new objects, 
         or overwrite objects that contain the same original filename and path. You must have editing rights
 	for objects in order for them to be updated.
@@ -20,7 +20,7 @@
 		
 
       <p i18n:domain="ZipFileTransport"
-         i18n:translate="description_import_file1">
+         i18n:translate="">
         Add the relevant details of the file to be added in the form below,
         select the file with the 'Browse' button, and press 'Import'.  
       </p>
@@ -33,7 +33,7 @@
 
         <fieldset>
 
-          <legend i18n:translate="legend_file_details">File Details</legend>
+          <legend i18n:domain="ZipFileTransport" i18n:translate="">File Details</legend>
 
           <div class="field"
                tal:define="description request/description | nothing">
@@ -42,7 +42,7 @@
 
             <div class="formHelp" 
                  i18n:domain="ZipFileTransport"                
-                 i18n:translate="help__import_description">
+                 i18n:translate="">
               A description which will be given to each file in the ZIP Archive.
             </div>
 
@@ -78,13 +78,13 @@
 	  <div class="field">
             <label for="overwrite"
                    i18n:domain="ZipFileTransport"
-                   i18n:translate="label_overwrite">
+                   i18n:translate="">
               Overwrite
             </label>
 
             <div class="formHelp"
                  i18n:domain="ZipFileTransport" 
-                 i18n:translate="help_overwrite">
+                 i18n:translate="">
               Check this box to overwrite existing files with the same name.
             </div>
 	  
@@ -102,15 +102,16 @@
 
             <label for="file" 
                    i18n:domain="ZipFileTransport"
-                   i18n:translate="label__zip_file">Zip File</label>
+                   i18n:translate="">Zip File</label>
 
             <span class="fieldRequired" title="Required"
+		  i18n:domain="ZipFileTransport"
                   i18n:attributes="title"
                   i18n:translate="label_required">(Required)</span>
 
                   <div class="formHelp"
                        i18n:domain="ZipFileTransport" 
-                       i18n:translate="help__zip_file">
+                       i18n:translate="">
                     Select the ZIP archive file to be uploaded by clicking the 'Browse' button.
                   </div>
 
@@ -126,7 +127,7 @@
 
                   <br />
 
-                  <span i18n:translate="no_file_uploaded"
+                  <span i18n:domain="ZipFileTransport" i18n:translate=""
                         tal:define="file_size python:here.getObjSize(here)"
                         tal:condition="not: file_size">
                     (No file has been uploaded yet)

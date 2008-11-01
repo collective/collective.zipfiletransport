@@ -7,7 +7,6 @@
   <include package=".browser" />
   <include package=".utilities" />
 
-
   <five:implements
       class="Products.CMFCore.PortalObject.PortalObjectBase"
       interface="collective.zipfiletransport.interfaces.IPortalObject"

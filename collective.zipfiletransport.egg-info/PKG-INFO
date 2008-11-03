@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: collective.zipfiletransport
-Version: 2.1.0dev-r73796
+Version: 2.1.0dev-r74031
 Summary: This tool is used to import and export zip files.
 Home-page: http://plone.org/products/zipfiletransport
 Author: enPraxis

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2008-11-01 20:24+0000\n"
+"POT-Creation-Date: 2008-11-04 23:56+0000\n"
 "PO-Revision-Date: 2007-05-06 00:15+0900\n"
 "Last-Translator: Haruo Takemura <h-tak@ga2.so-net.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

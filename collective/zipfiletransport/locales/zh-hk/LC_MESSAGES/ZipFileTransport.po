@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2007-09-15 01:19-0700\n"
+"Last-Translator: Chenyong(Jessie) Zhu <jessie0587@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: de\n"
-"Language-Name: Deutsch\n"
-"Preferred-Encodings: utf-8 latin1\n"
+"Language-Code: zh-hk\n"
+"Language-Name: Chinese (Hongkong)\n"
+"Preferred-Encodings: utf-8\n"
 "Domain: ZipFileTransport\n"
 
 #. Default: "(No file has been uploaded yet)"
@@ -22,7 +22,7 @@ msgstr ""
 #. Default: "A description which will be given to each file in the ZIP Archive."
 #: ./skins/ZipFileTransport/import_form.cpt:43
 msgid "A description which will be given to each file in the ZIP Archive."
-msgstr ""
+msgstr "在zip文件夾中每個文件中都添加的說明"
 
 #: ./browser/interfaces.py:43
 msgid "A description which will be given to each file in the ZIP archive."
@@ -31,7 +31,7 @@ msgstr ""
 #. Default: "Add the relevant details of the file to be added in the form below, select the file with the 'Browse' button, and press 'Import'."
 #: ./skins/ZipFileTransport/import_form.cpt:22
 msgid "Add the relevant details of the file to be added in the form below, select the file with the 'Browse' button, and press 'Import'."
-msgstr ""
+msgstr "要想在下列表格中添加相關內容，請點擊“瀏覽”按鈕，然後點擊“導入”。"
 
 #. Default: "All files in the course will be exported in .zip file format."
 #: ./browser/export_widget.pt:10
@@ -49,7 +49,7 @@ msgstr ""
 #. Default: "Check this box to overwrite existing files with the same name."
 #: ./skins/ZipFileTransport/import_form.cpt:85
 msgid "Check this box to overwrite existing files with the same name."
-msgstr ""
+msgstr "點擊此欄將覆蓋已存在的同名文件"
 
 #: ./browser/zipfiletransportprefs.py:109
 msgid "Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten the default object types."
@@ -95,17 +95,17 @@ msgstr ""
 #. Default: "Import"
 #: ./skins/ZipFileTransport/import_form.cpt:141
 msgid "Import"
-msgstr ""
+msgstr "導入"
 
 #. Default: "Import Content"
 #: ./skins/ZipFileTransport/import_form.cpt:10
 msgid "Import Content"
-msgstr ""
+msgstr "導入內容"
 
 #. Default: "Overwrite"
 #: ./skins/ZipFileTransport/import_form.cpt:79
 msgid "Overwrite"
-msgstr ""
+msgstr "覆蓋"
 
 #. Default: "Required"
 #: ./skins/ZipFileTransport/import_form.cpt:107
@@ -115,7 +115,7 @@ msgstr ""
 #. Default: "Select the ZIP archive file to be uploaded by clicking the 'Browse' button."
 #: ./skins/ZipFileTransport/import_form.cpt:112
 msgid "Select the ZIP archive file to be uploaded by clicking the 'Browse' button."
-msgstr ""
+msgstr "點擊“瀏覽”按鈕，選擇欲上傳的zip文件。"
 
 #: ./browser/interfaces.py:67
 msgid "Select the ZIP archive file to be uploaded by clicking the 'Browser' button."
@@ -162,7 +162,7 @@ msgstr ""
 #. Default: "Zip File"
 #: ./skins/ZipFileTransport/import_form.cpt:103
 msgid "Zip File"
-msgstr ""
+msgstr "ZIP文件"
 
 #: ./browser/interfaces.py:35
 msgid "Zip File Export"

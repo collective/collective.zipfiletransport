@@ -4,6 +4,8 @@
 	   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="ZipFileTransport">
 
+  <five:registerPackage package="." />
+
   <include package=".browser" />
   <include package=".utilities" />
 

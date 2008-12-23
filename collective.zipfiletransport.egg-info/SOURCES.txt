@@ -33,6 +33,15 @@ collective/zipfiletransport/browser/widgets.py
 collective/zipfiletransport/browser/zipexport.py
 collective/zipfiletransport/browser/zipfiletransportprefs.py
 collective/zipfiletransport/browser/zipimport.py
+collective/zipfiletransport/i18n/plone-de.po
+collective/zipfiletransport/i18n/plone-es.po
+collective/zipfiletransport/i18n/plone-fr.po
+collective/zipfiletransport/i18n/plone-ja.po
+collective/zipfiletransport/i18n/plone-nl.po
+collective/zipfiletransport/i18n/plone-tr.po
+collective/zipfiletransport/i18n/plone-zh-cn.po
+collective/zipfiletransport/i18n/plone-zh-tw.po
+collective/zipfiletransport/i18n/plone.pot
 collective/zipfiletransport/locales/ZipFileTransport.pot
 collective/zipfiletransport/locales/de/LC_MESSAGES/ZipFileTransport.mo
 collective/zipfiletransport/locales/de/LC_MESSAGES/ZipFileTransport.po
@@ -50,6 +59,8 @@ collective/zipfiletransport/locales/tr/LC_MESSAGES/ZipFileTransport.mo
 collective/zipfiletransport/locales/tr/LC_MESSAGES/ZipFileTransport.po
 collective/zipfiletransport/locales/zh-cn/LC_MESSAGES/ZipFileTransport.mo
 collective/zipfiletransport/locales/zh-cn/LC_MESSAGES/ZipFileTransport.po
+collective/zipfiletransport/locales/zh-hk/LC_MESSAGES/ZipFileTransport.mo
+collective/zipfiletransport/locales/zh-hk/LC_MESSAGES/ZipFileTransport.po
 collective/zipfiletransport/locales/zh-tw/LC_MESSAGES/ZipFileTransport.mo
 collective/zipfiletransport/locales/zh-tw/LC_MESSAGES/ZipFileTransport.po
 collective/zipfiletransport/profiles/default/actionicons.xml

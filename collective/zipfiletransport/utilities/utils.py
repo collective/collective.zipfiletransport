@@ -1,5 +1,6 @@
 ##################################################################################
-#    Copyright (C) 2006-2007 Utah State University, All rights reserved.          
+#    Copyright (c) 2004-2009 Utah State University, All rights reserved. 
+#    Portions copyright 2009 Massachusetts Institute of Technology, All rights reserved.
 #                                                                                 
 #    This program is free software; you can redistribute it and/or modify         
 #    it under the terms of the GNU General Public License as published by         
@@ -17,9 +18,8 @@
 #                                                                                 
 ##################################################################################
 
-__author__ = 'Brent Lambert, David Ray, Jon Thomas'
-__docformat__ = 'restructuredtext'
-__version__ = "$Revision: 1 $"[11:-2]
+__author__  = '''Brent Lambert, David Ray, Jon Thomas'''
+__version__   = '$ Revision 0.0 $'[11:-2]
 
 from Products.CMFCore.utils import UniqueObject, getToolByName
 from OFS.SimpleItem import SimpleItem

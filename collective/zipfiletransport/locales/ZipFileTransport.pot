@@ -1,7 +1,10 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2009-07-21 23:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,23 +17,8 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ZipFileTransport\n"
 
-#. Default: "(No file has been uploaded yet)"
-#: ./skins/ZipFileTransport/import_form.cpt:130
-msgid "(No file has been uploaded yet)"
-msgstr ""
-
-#. Default: "A description which will be given to each file in the ZIP Archive."
-#: ./skins/ZipFileTransport/import_form.cpt:43
-msgid "A description which will be given to each file in the ZIP Archive."
-msgstr ""
-
-#: ./browser/interfaces.py:43
+#: ./browser/interfaces.py:42
 msgid "A description which will be given to each file in the ZIP archive."
-msgstr ""
-
-#. Default: "Add the relevant details of the file to be added in the form below, select the file with the 'Browse' button, and press 'Import'."
-#: ./skins/ZipFileTransport/import_form.cpt:22
-msgid "Add the relevant details of the file to be added in the form below, select the file with the 'Browse' button, and press 'Import'."
 msgstr ""
 
 #. Default: "All files in the course will be exported in .zip file format."
@@ -38,16 +26,15 @@ msgstr ""
 msgid "All files in the course will be exported in .zip file format."
 msgstr ""
 
-#: ./browser/zipexport.py:66
+#: ./browser/zipexport.py:64
 msgid "All files in the folder will be exported in .zip file format"
 msgstr ""
 
-#: ./browser/interfaces.py:51
+#: ./browser/interfaces.py:50
 msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
 msgstr ""
 
-#. Default: "Check this box to overwrite existing files with the same name."
-#: ./skins/ZipFileTransport/import_form.cpt:85
+#: ./browser/interfaces.py:55
 msgid "Check this box to overwrite existing files with the same name."
 msgstr ""
 
@@ -55,7 +42,7 @@ msgstr ""
 msgid "Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten the default object types."
 msgstr ""
 
-#: ./browser/interfaces.py:46
+#: ./browser/interfaces.py:45
 msgid "Contributors"
 msgstr ""
 
@@ -63,17 +50,12 @@ msgstr ""
 msgid "Document Type"
 msgstr ""
 
-#: ./browser/zipexport.py:75
+#: ./browser/zipexport.py:73
 msgid "Export"
 msgstr ""
 
-#: ./browser/zipexport.py:65
+#: ./browser/zipexport.py:63
 msgid "Export Content"
-msgstr ""
-
-#. Default: "File Details"
-#: ./skins/ZipFileTransport/import_form.cpt:36
-msgid "File Details"
 msgstr ""
 
 #: ./browser/zipfiletransportprefs.py:43
@@ -84,7 +66,7 @@ msgstr ""
 msgid "Folder Type"
 msgstr ""
 
-#: ./browser/interfaces.py:61
+#: ./browser/interfaces.py:60
 msgid "If selected, this item will not appear in the navigation tree."
 msgstr ""
 
@@ -92,32 +74,19 @@ msgstr ""
 msgid "Image Type"
 msgstr ""
 
-#. Default: "Import"
-#: ./skins/ZipFileTransport/import_form.cpt:141
+#: ./browser/zipimport.py:102
 msgid "Import"
 msgstr ""
 
-#. Default: "Import Content"
-#: ./skins/ZipFileTransport/import_form.cpt:10
+#: ./browser/zipimport.py:94
 msgid "Import Content"
 msgstr ""
 
-#. Default: "Overwrite"
-#: ./skins/ZipFileTransport/import_form.cpt:79
+#: ./browser/interfaces.py:54
 msgid "Overwrite"
 msgstr ""
 
-#. Default: "Required"
-#: ./skins/ZipFileTransport/import_form.cpt:107
-msgid "Required"
-msgstr ""
-
-#. Default: "Select the ZIP archive file to be uploaded by clicking the 'Browse' button."
-#: ./skins/ZipFileTransport/import_form.cpt:112
-msgid "Select the ZIP archive file to be uploaded by clicking the 'Browse' button."
-msgstr ""
-
-#: ./browser/interfaces.py:67
+#: ./browser/interfaces.py:66
 msgid "Select the ZIP archive file to be uploaded by clicking the 'Browser' button."
 msgstr ""
 
@@ -142,29 +111,23 @@ msgstr ""
 msgid "The following files will be exported in .zip file format."
 msgstr ""
 
-#: ./browser/interfaces.py:36
+#: ./browser/interfaces.py:35
 msgid "The name of the file downloaded to your local machine."
 msgstr ""
 
-#: ./browser/interfaces.py:47
+#: ./browser/interfaces.py:46
 msgid "The names of people that have contributed to this item.  Each contributor should be on a separate line."
 msgstr ""
 
-#: ./browser/zipimport.py:97
+#: ./browser/zipimport.py:95
 msgid "This form will import content from files contained in a .zip file, and will create new objects"
 msgstr ""
 
-#. Default: "This form will import content from files contained in a .zip file, and will either create new objects, or overwrite objects that contain the same original filename and path. You must have editing rights for objects in order for them to be updated."
-#: ./skins/ZipFileTransport/import_form.cpt:14
-msgid "This form will import content from files contained in a .zip file, and will either create new objects, or overwrite objects that contain the same original filename and path. You must have editing rights for objects in order for them to be updated."
-msgstr ""
-
-#. Default: "Zip File"
-#: ./skins/ZipFileTransport/import_form.cpt:103
+#: ./browser/interfaces.py:65
 msgid "Zip File"
 msgstr ""
 
-#: ./browser/interfaces.py:35
+#: ./browser/interfaces.py:34
 msgid "Zip File Export"
 msgstr ""
 

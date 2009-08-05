@@ -25,8 +25,7 @@ from zope.app.file.interfaces import IFile
 from zope.interface import Interface, Attribute
 from zope import schema
 from collective.zipfiletransport.schemas import ZipFileLine
-from collective.zipfiletransport import ZipFileTransportMessageFactory
-from Products.CMFPlone import PloneMessageFactory as _
+from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
 class IExport(Interface):
     """ Export Form """

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2009-08-05 22:11+0000\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
 "PO-Revision-Date: 2007-09-15 01:19-0700\n"
 "Last-Translator: Chenyong(Jessie) Zhu <jessie0587@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,10 @@ msgstr ""
 msgid "Document Type"
 msgstr ""
 
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
 #: ./browser/zipexport.py:72
 msgid "Export"
 msgstr ""
@@ -81,6 +85,14 @@ msgstr "導入"
 #: ./browser/zipimport.py:93
 msgid "Import Content"
 msgstr "導入內容"
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
 
 #. Default: "Overwrite"
 #: ./browser/interfaces.py:52

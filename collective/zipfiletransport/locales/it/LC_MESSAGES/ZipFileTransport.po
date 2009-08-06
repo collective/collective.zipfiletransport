@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-08-05 22:11+0000\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
 "PO-Revision-Date: 2009-07-30 15:29+0100\n"
 "Last-Translator: Antonio Fini <antonio.fini@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,10 @@ msgstr "Collaboratori"
 msgid "Document Type"
 msgstr "Tipo Documento"
 
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
 #: ./browser/zipexport.py:72
 msgid "Export"
 msgstr "Esporta"
@@ -81,6 +85,14 @@ msgstr "Inporta"
 #: ./browser/zipimport.py:93
 msgid "Import Content"
 msgstr "Importa contenuto"
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
 
 #. Default: "Overwrite"
 #: ./browser/interfaces.py:52

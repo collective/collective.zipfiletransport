@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ZipFile Transport Tool\n"
-"POT-Creation-Date: 2009-08-05 22:11+0000\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
 "PO-Revision-Date: 2009-08-03 09:21+0100\n"
 "Last-Translator: Guillermo de la Torre <guillermo.delatorre@upm.es>\n"
 "Language-Team: Oficina OCW-UPM <ocw-upm@upm.es>\n"
@@ -48,6 +48,10 @@ msgstr "Colaboradores"
 msgid "Document Type"
 msgstr "Tipo de documento"
 
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
 #: ./browser/zipexport.py:72
 msgid "Export"
 msgstr "Exportar"
@@ -81,6 +85,14 @@ msgstr "Importar"
 #: ./browser/zipimport.py:93
 msgid "Import Content"
 msgstr "Importar contenido"
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
 
 #. Default: "Overwrite"
 #: ./browser/interfaces.py:52

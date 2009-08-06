@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ZipFile Transport Tool\n"
-"POT-Creation-Date: 2009-08-05 22:11+0000\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
 "PO-Revision-Date: 2009-07-29 17:07-0700\n"
 "Last-Translator: Jessie Zhu <jessie.zhu@usu.edu>\n"
 "Language-Team: Mark <gdzhao@gse.pku.edu.cn>\n"
@@ -48,6 +48,10 @@ msgstr "提供者"
 msgid "Document Type"
 msgstr "文本类型"
 
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
 #: ./browser/zipexport.py:72
 msgid "Export"
 msgstr "导出"
@@ -81,6 +85,14 @@ msgstr "导入"
 #: ./browser/zipimport.py:93
 msgid "Import Content"
 msgstr "导入内容"
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
 
 #. Default: "Overwrite"
 #: ./browser/interfaces.py:52

@@ -36,7 +36,7 @@ class IExport(Interface):
 class IImport(Interface):
     """ Import Form """
 
-    description = schema.Text(title=_(u"Description"),
+    description = schema.Text(title=_(u"Import Description"),
                               description=_(u"A description which will be given to each file in the ZIP archive."),
                               required=False)
 
@@ -44,7 +44,7 @@ class IImport(Interface):
                               description=_(u"The names of people that have contributed to this item.  Each contributor should be on a separate line."),
                               required=False)
 
-    categories = schema.Text(title=_(u"Categories"),
+    categories = schema.Text(title=_(u"Keyword Categories"),
                               description=_(u"Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."),
                               required=False)
 
@@ -54,7 +54,7 @@ class IImport(Interface):
                             default=False, 
                             required=False)
 
-    excludefromnav = schema.Bool(title=_(u"Exclude from navigation"),
+    excludefromnav = schema.Bool(title=_(u"Exclude from left navigation"),
                                  description=_(u"If selected, this item will not appear in the navigation tree."),
                                  default=False,
                                  required=False)

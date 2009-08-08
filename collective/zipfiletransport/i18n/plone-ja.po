@@ -14,8 +14,3 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
-#. Default: "Zip File Transport"
-#: ./profiles/default/controlpanel.xml
-msgid "Zip File Transport"
-msgstr "ZIPファイルトランスポート"
-

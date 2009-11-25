@@ -152,6 +152,8 @@ class ZipFileTransportUtility(SimpleItem):
                 parent.invokeFactory(type_name=folder_type, id=path_part)
                 foldr = getattr(parent, path_part)
                 foldr.setTitle(path_part)
+                if excludefromnav:
+                    foldr.setExcludeFromNav(True)
                 foldr = parent.portal_factory.doCreate(foldr, path_part)
                 self.portal_catalog.reindexObject(foldr, self.portal_catalog.indexes())
                 

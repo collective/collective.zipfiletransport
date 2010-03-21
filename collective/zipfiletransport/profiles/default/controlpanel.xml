@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_controlpanel" meta_type="Plone Control Panel Tool" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
-  <configlet title="Zip File Transport"
+  <configlet title="ZipFileTransport"
              action_id="ZipFileTransport"
              appId="ZipFileTransport"
              category="Products"

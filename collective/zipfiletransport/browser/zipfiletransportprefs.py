@@ -35,22 +35,22 @@ class IZipFileTransportPrefsForm(Interface):
     """ The view for zipfile transport prefs form. """
 
     image_type = TextLine(title=_(u'Image Type'),
-                          description=_(u'Set the image type here. Images imported via ZipFile Transport '
+                          description=_(u'Set the image type here. Images imported via ZipFileTransport '
                                         'will be instantiated as an object of this type.'),
                           required=True)
                           
     file_type = TextLine(title=_(u'File Type'),
-                          description=_(u'Set your file type here. Files imported via ZipFile Transport '
+                          description=_(u'Set your file type here. Files imported via ZipFileTransport '
                                         'will be instantiated as an object of this type'),
                           required=True)
                           
     doc_type = TextLine(title=_(u'Document Type'),
-                          description=_(u'Set your document type here. Documents imported via ZipFile Transport '
+                          description=_(u'Set your document type here. Documents imported via ZipFileTransport '
                                         'will be instantiated as an object of this type.'),
                           required=True)
                           
     folder_type = TextLine(title=_(u'Folder Type'),
-                          description=_(u'Set your folderish type here. Folders imported via ZipFile Transport '
+                          description=_(u'Set your folderish type here. Folders imported via ZipFileTransport '
                                         'will be instantiated as an object of this type'),
                           required=True)
                           
@@ -104,9 +104,9 @@ class ZipFileTransportPrefsForm(ControlPanelForm):
     implements(IZipFileTransportPrefsForm)
     form_fields = form.FormFields(IZipFileTransportPrefsForm)
 
-    label = _(u'ZipFile Transport Settings Form')
+    label = _(u'ZipFileTransport Settings Form')
     description = _(u'Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten '
                       'the default object types.')
-    form_name = _(u'ZipFile Transport Settings')
+    form_name = _(u'ZipFileTransport Settings')
 
 

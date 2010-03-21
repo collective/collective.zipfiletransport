@@ -23,7 +23,7 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 from setuptools import setup, find_packages
 import os
 
-version = '2.1.3-final'
+version = '2.2.0-final'
 
 setup(name='collective.zipfiletransport',
       version=version,

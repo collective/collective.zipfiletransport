@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+<!-- Folder contents for to customize table.pt for ZipFileTransport Import button -->
+
+<browser:page
+    for="*"
+    class=".browser.foldercontents.FolderContentsView"
+    name="folder_contents"
+    template="browser/foldercontents.pt"
+    permission="cmf.ListFolderContents" 
+    />
+
+<browser:page
+     for="*"
+     class=".browser.foldercontents.FolderContentsKSSView"
+     attribute="update_table"
+     name="foldercontents_update_table"
+     permission="cmf.ListFolderContents" />
+
+</configure>

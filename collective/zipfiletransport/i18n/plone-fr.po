@@ -13,12 +13,12 @@ msgstr ""
 "Language-Name: French\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-"TEST MESSAGEProject-Id-Version: ZipFile Transport Tool\n"
+"TEST MESSAGEProject-Id-Version: ZipFileTransport Tool\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#. Default: "Zip File Transport"
+#. Default: "ZipFileTransport"
 #: ./profiles/default/controlpanel.xml
-msgid "Zip File Transport"
+msgid "ZipFileTransport"
 msgstr ""
 

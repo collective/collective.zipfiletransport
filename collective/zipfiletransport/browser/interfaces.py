@@ -20,9 +20,7 @@
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
-from zope.publisher.interfaces.browser import IBrowserView
-from zope.app.file.interfaces import IFile
-from zope.interface import Interface, Attribute
+from zope.interface import Interface
 from zope import schema
 from collective.zipfiletransport.schemas import ZipFileLine
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
@@ -41,7 +39,7 @@ class IImport(Interface):
                               required=False)
 
     contributors = schema.Text(title=_(u"Contributors"),
-                              description=_(u"The names of people that have contributed to this item.  Each contributor should be on a separate line."),
+                              description=_(u"The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."),
                               required=False)
 
     categories = schema.Text(title=_(u"Keyword Categories"),
@@ -50,17 +48,17 @@ class IImport(Interface):
 
 
     overwrite = schema.Bool(title=_(u"Overwrite"),
-                            description=_(u"Check this box to overwrite existing files with the same name."),
+                            description=_(u"Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."),
                             default=False, 
                             required=False)
 
     excludefromnav = schema.Bool(title=_(u"Exclude from left navigation"),
-                                 description=_(u"If selected, this item will not appear in the navigation tree."),
+                                 description=_(u"If selected, imported item(s) will not appear in the navigation tree."),
                                  default=False,
                                  required=False)
 
 
     filename = ZipFileLine(title=_(u"Zip File"),
-                           description=_(u"Select the ZIP archive file to be uploaded by clicking the 'Browser' button."),
+                           description=_(u"Select the ZIP archive file to be imported."),
                            required=True)
 

@@ -18,9 +18,9 @@ msgstr ""
 msgid "A description which will be given to each file in the ZIP archive."
 msgstr "ZIP arşivdeki her bir dosya için bir açıklama."
 
-#. Default: "All files in the course will be exported in .zip file format."
+#. Default: "All files in the folder will be exported in .zip file format."
 #: ./browser/export_widget.pt:10
-msgid "All files in the course will be exported in .zip file format."
+msgid "All files in the folder will be exported in .zip file format."
 msgstr "Bu ders içindeki bütün dosyalar .zip dosya formatında aktarılacaktır."
 
 #: ./browser/zipexport.py:64
@@ -31,9 +31,9 @@ msgstr "Bu klasördeki bütün dosyalar .zip dosya formatında aktarılacaktır.
 msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
 msgstr "Anahtar kelimeler veya etiketler, içeriğinizi kategorilendirmenize yardımcı olur. Her bir kategori ayrı bir satır olmalıdır."
 
-#. Default: "Check this box to overwrite existing files with the same name."
+#. Default: "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
 #: ./browser/interfaces.py:55
-msgid "Check this box to overwrite existing files with the same name."
+msgid "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
 msgstr "Aynı isim ile varolan dosyaların üzerine yazmak için bu kutuyu işaretleyin."
 
 #: ./browser/zipfiletransportprefs.py:109
@@ -65,7 +65,7 @@ msgid "Folder Type"
 msgstr "Kalsör Tipi"
 
 #: ./browser/interfaces.py:60
-msgid "If selected, this item will not appear in the navigation tree."
+msgid "If selected, imported item(s) will not appear in the navigation tree."
 msgstr "Eğer seçilmişse, bu madde gezinti ağacında görülmeyecektir."
 
 #: ./browser/zipfiletransportprefs.py:38
@@ -88,28 +88,28 @@ msgid "Overwrite"
 msgstr "Üzerine Yaz"
 
 #: ./browser/interfaces.py:66
-msgid "Select the ZIP archive file to be uploaded by clicking the 'Browser' button."
+msgid "Select the ZIP archive file to be imported."
 msgstr "\"Browser\" düğmesine tıklayarak yüklenecek ZIP arşiv dosyasını seçin."
 
 #: ./browser/zipfiletransportprefs.py:39
-msgid "Set the image type here. Images imported via ZipFile Transport will be instantiated as an object of this type."
+msgid "Set the image type here. Images imported via ZipFileTransport will be instantiated as an object of this type."
 msgstr "Resim tipini ayarlayın. Sıkıştırılmış dosya aktarımı ile içe aktarılan resimler bu tipte bir nesne olarak somutlaştırılacaktır."
 
 #: ./browser/zipfiletransportprefs.py:49
-msgid "Set your document type here. Documents imported via ZipFile Transport will be instantiated as an object of this type."
+msgid "Set your document type here. Documents imported via ZipFileTransport will be instantiated as an object of this type."
 msgstr "Doküman tipini ayarlayın. Sıkıştırılmış dosya aktarımı ile içe aktarılan dokümanlar bu tipte bir nesne olarak somutlaştırılacaktır."
 
 #: ./browser/zipfiletransportprefs.py:44
-msgid "Set your file type here. Files imported via ZipFile Transport will be instantiated as an object of this type"
+msgid "Set your file type here. Files imported via ZipFileTransport will be instantiated as an object of this type"
 msgstr "Dosya tipini ayarlayın. Sıkıştırılmış dosya aktarımı ile içe aktarılan dosyalar bu tipte bir nesne olarak somutlaştırılacaktır."
 
 #: ./browser/zipfiletransportprefs.py:54
-msgid "Set your folderish type here. Folders imported via ZipFile Transport will be instantiated as an object of this type"
+msgid "Set your folderish type here. Folders imported via ZipFileTransport will be instantiated as an object of this type"
 msgstr "Kalsör tipini ayarlayın. Sıkıştırılmış dosya aktarımı ile içe aktarılan klasörler bu tipte bir nesne olarak somutlaştırılacaktır."
 
-#. Default: "The following files will be exported in .zip file format."
+#. Default: "The following files will be exported in .zip file format:"
 #: ./browser/export_widget.pt:14
-msgid "The following files will be exported in .zip file format."
+msgid "The following files will be exported in .zip file format:"
 msgstr "Belirtilen dosyalar .zip dosya formatında aktarılacaktır."
 
 #: ./browser/interfaces.py:35
@@ -117,7 +117,7 @@ msgid "The name of the file downloaded to your local machine."
 msgstr "Yerel bilgisayarınıza indirilecek dosyanın adı."
 
 #: ./browser/interfaces.py:46
-msgid "The names of people that have contributed to this item.  Each contributor should be on a separate line."
+msgid "The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."
 msgstr "Bu maddeye katkıda bulunanların isimleri. Her katılımcı ayrı bir satırda olmalıdır."
 
 #: ./browser/zipimport.py:95
@@ -134,11 +134,11 @@ msgid "Zip File Export"
 msgstr "Dışa Sıkıştırılmış (Zip) Dosya Aktarma"
 
 #: ./browser/zipfiletransportprefs.py:111
-msgid "ZipFile Transport Settings"
+msgid "ZipFileTransport Settings"
 msgstr "Sıkıştırılmış Dosya Aktarım Ayarları"
 
 #: ./browser/zipfiletransportprefs.py:108
-msgid "ZipFile Transport Settings Form"
+msgid "ZipFileTransport Settings Form"
 msgstr "Sıkıştırılmış Dosya Aktarım Ayarları Formu"
 
 #. Default: "ZipFileTransport"

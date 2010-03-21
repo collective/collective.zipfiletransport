@@ -20,25 +20,21 @@
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
-from Products.CMFCore.utils import UniqueObject, getToolByName
+from Products.CMFCore.utils import getToolByName
 from OFS.SimpleItem import SimpleItem
-from OFS.PropertyManager import PropertyManager
-from Globals import InitializeClass
-from Products.CMFCore import permissions
-from Products.Archetypes.atapi import *
-from collective.zipfiletransport.config import *
 from Products.ATContentTypes import interfaces
-from operator import itemgetter
-from types import StringType
-from zLOG import LOG, INFO, DEBUG
-from os.path import split, splitext, splitdrive
-from cStringIO import StringIO
-from zipfile import ZipFile, BadZipfile, ZIP_DEFLATED
-from re import compile
+from os import close
+from os.path import split, splitext
+from zipfile import ZipFile, ZIP_DEFLATED
 from urllib import unquote
-from OFS.SimpleItem import SimpleItem
 from zope.interface import implements
 from interfaces import IZipFileTransportUtility
+
+
+from plone.i18n.normalizer.interfaces import IURLNormalizer
+from zope.component import queryUtility
+
+import unicodedata
 
 class ZipFileTransportUtility(SimpleItem):
     """ ZipFileTransport Utility """
@@ -58,7 +54,6 @@ class ZipFileTransportUtility(SimpleItem):
         Import content from a zip file, creating the folder structure within a ZODB hierarchy.
         """
         self.bad_folders = []        
-        
  
         zf=ZipFile(file, 'r')
  
@@ -77,20 +72,25 @@ class ZipFileTransportUtility(SimpleItem):
                 path_as_list = current_file[1:].split('/')
             else:
                 path_as_list = current_file.split('/')
-            
-            file_name = path_as_list[-1]
 
+            file_name = self._convertToUnicode(path_as_list[-1])
+            file_name = unicodedata.normalize('NFC', file_name )
+            
+            normalized_file_name = queryUtility(IURLNormalizer).normalize(file_name)
+            
+            
             # Checks to make sure that the file path does not contain any previouslsy found bad folders.
             if not self._checkFilePath(current_file, path_as_list):
                 continue
   
+
             folder = self._createFolderStructure(path_as_list, context, excludefromnav)
             
             # no folder to add to? Then move on to next object.
             if not folder:
                 continue
 
-            id_available = context.checkIdAvailable(id=file_name)
+            id_available = context.checkIdAvailable(id=normalized_file_name)
             
             # Create an object if everything looks good
             if id_available or (overwrite and not id_available):
@@ -98,9 +98,9 @@ class ZipFileTransportUtility(SimpleItem):
                 fdata = zf.read(current_file)
                 
                 if not id_available:
-                    folder.manage_delObjects([file_name])
+                    folder.manage_delObjects([normalized_file_name])
  
-                obj = self._createObject(file_name, fdata, folder)
+                obj = self._createObject(normalized_file_name, fdata, folder)
 
                 if hasattr(obj,'description') and description:
                     obj.setDescription(description)
@@ -111,7 +111,8 @@ class ZipFileTransportUtility(SimpleItem):
                 if excludefromnav:
                     obj.setExcludeFromNav(True)
                 obj.reindexObject()
-
+		obj.setTitle(file_name)
+                obj.reindexObject()
         zf.close()   
 
 
@@ -132,33 +133,35 @@ class ZipFileTransportUtility(SimpleItem):
         props = getToolByName(self.context, 'portal_properties')
         folder_type = props.zipfile_properties.folder_type
 
+        file_name = self._convertToUnicode(path_as_list[-1])
+        file_name = unicodedata.normalize('NFC', file_name )
 
-        file_name = path_as_list[-1]
-
+        
         # Create the folder structure
         for i in range( len(path_as_list) - 1 ):
-            path_part = path_as_list[i]
+            path_part = self._convertToUnicode(path_as_list[i])
+            path_part = unicodedata.normalize('NFC', path_part)
+            normalized_path_part = queryUtility(IURLNormalizer).normalize(path_part)
             
             current_path = '/'.join(path_as_list[:i+1])
             
             # If not in the current folder, then just get the folder
-            if path_part not in parent.objectIds():
-                
-                # Checks to make sure that the folder is valid.
-                if not parent.checkIdAvailable(id=path_part):
+            if normalized_path_part not in parent.objectIds():
+                # Checks to make sure that the folder is valid.            
+                if not parent.checkIdAvailable(id=normalized_path_part):
                     self.bad_folders.append(current_path)
                     return None          
                     
-                parent.invokeFactory(type_name=folder_type, id=path_part)
-                foldr = getattr(parent, path_part)
+                parent.invokeFactory(type_name=folder_type, id=normalized_path_part)
+                foldr = getattr(parent, normalized_path_part)
                 foldr.setTitle(path_part)
                 if excludefromnav:
                     foldr.setExcludeFromNav(True)
-                foldr = parent.portal_factory.doCreate(foldr, path_part)
+                foldr = parent.portal_factory.doCreate(foldr, normalized_path_part)
                 self.portal_catalog.reindexObject(foldr, self.portal_catalog.indexes())
                 
             else:
-                foldr = getattr(parent, path_part)
+                foldr = getattr(parent, normalized_path_part)
                 
             parent = foldr
             
@@ -254,9 +257,8 @@ class ZipFileTransportUtility(SimpleItem):
         # create a filename without illegal characters
         objects_list = self._createObjectList(context, obj_paths)
         context_path = str( context.virtual_url_path() )
-        content = self._getAllObjectsData(objects_list, context_path)
-        
-        return content
+        zip_path = self._getAllObjectsData(objects_list, context_path)        
+        return zip_path
 
     def _createObjectList(self, context, obj_paths=None, state=None):
         """
@@ -297,8 +299,11 @@ class ZipFileTransportUtility(SimpleItem):
         Returns the data in all files with a content object to be placed in a zipfile
         """
         # Use temporary IO object instead of writing to filesystem.
-        out = StringIO()
-        zipFile =  ZipFile(out, 'w', ZIP_DEFLATED)
+        import tempfile
+        fd, path = tempfile.mkstemp('.zipfiletransport')
+        close(fd)
+        
+        zipFile =  ZipFile(path, 'w', ZIP_DEFLATED)
 
         for obj in objects_listing:
             object_path = str(obj.virtual_url_path())
@@ -350,17 +355,30 @@ class ZipFileTransportUtility(SimpleItem):
 
             # start point for object path, adding 1 removes the initial '/'
             object_path = self.generateSafeFileName(object_path)
-            if object_path: 
-                zipFile.writestr(object_path, file_data)
-                
-        zipFile.close()
 
-        out.seek(0)
-        content = out.read()
-        out.close()
+            if object_path: 
+                #reconstruct path with filename, restores non-ascii characters in filenames
+                i = 0
+                filename_path = []
+                while i < len(object_path.split('/')):
+                    #store each part
+                    
+                    filename_path +=  [self.context.portal_catalog.searchResults(path={'query':(obj.virtual_url_path()), })[0].Title, ]
+                    obj = obj.aq_inner.aq_parent
+                    i += 1        
+                if len(filename_path) > 1:
+                    filename_path.reverse()
+                    filename_path = '/'.join(filename_path)
+                else:
+                    filename_path = filename_path[0] 
+                if 'Windows' in self.request['HTTP_USER_AGENT']:
+                    filename_path = filename_path.decode('utf-8').encode('cp437')
+                zipFile.writestr(filename_path, file_data)                
+
+        zipFile.close()
+        return path
+                
         
-        return content
-    
     def _objImplementsInterface(self, obj, interfaceClass):
         """
         Return boolean indicating if obj implements the given interface.
@@ -401,7 +419,15 @@ class ZipFileTransportUtility(SimpleItem):
                 
         return list
     
-
+    def _convertToUnicode(self, bytestring):
+        # Convert bytestring into unicode object
+        # *nix encoding
+        try:
+            unicode_text = unicode(bytestring, 'utf-8')
+        # WinZip encoding            
+        except UnicodeDecodeError:
+            unicode_text = unicode(bytestring, 'cp437')
+        return unicode_text
 
     #
     # Utility functions for use by outside tools.
@@ -453,6 +479,8 @@ class ZipFileTransportUtility(SimpleItem):
 
     def get_zipfile_name(self):
         return 'Test.zip'
+        
+                    
 
 
 

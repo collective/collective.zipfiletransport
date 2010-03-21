@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ZipFile Transport Tool\n"
+"Project-Id-Version: ZipFileTransport Tool\n"
 "POT-Creation-Date: 2009-08-06 22:30+0000\n"
 "PO-Revision-Date: 2009-08-03 08:59+0100\n"
 "Last-Translator: Guillermo de la Torre <guillermo.delatorre@upm.es>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
-#. Default: "Zip File Transport"
+#. Default: "ZipFileTransport"
 #: ./profiles/default/controlpanel.xml
-msgid "Zip File Transport"
-msgstr "Zip File Transport"
+msgid "ZipFileTransport"
+msgstr "ZipFileTransport"
 

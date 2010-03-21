@@ -22,15 +22,12 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 
 from zope.formlib.form import FormFields, action
 from Products.Five.formlib.formbase import EditForm
-from zope.component import getUtility, adapts
+from zope.component import getUtility
 from zope.interface import implements
 from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
 from collective.zipfiletransport.browser.interfaces import IExport
-from Products.ATContentTypes.content.folder import ATFolder
-from Products.CMFPlone.Portal import PloneSite
-from Products.CMFPlone.utils import getToolByName
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from widgets import ExportWidget
+import os
 import string
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
@@ -71,6 +68,7 @@ class ExportForm(EditForm):
 
     @action(_(u'Export'))
     def action_export(self, action, data):
+        RESPONSE_BLOCK_SIZE = 32768
         #Discover Object Paths in hidden form fields
         obj_paths = None
         try:
@@ -92,15 +90,28 @@ class ExportForm(EditForm):
 
 
         zipfilename = self.zft_util.generateSafeFileName(filename)
+        #Detect OS
+        zipfilename = filename.encode('utf-8')
 
-        content = self.zft_util.exportContent(context=self.context,obj_paths=obj_paths, filename=filename)
+        zip_path = self.zft_util.exportContent(context=self.context,obj_paths=obj_paths, filename=filename)
 
         self.context.REQUEST.RESPONSE.setHeader('content-type', 'application/zip')
-        self.context.REQUEST.RESPONSE.setHeader('content-length', len(content))
+        self.context.REQUEST.RESPONSE.setHeader('content-length', str(os.stat(zip_path)[6]))
         self.context.REQUEST.RESPONSE.setHeader('Content-Disposition',' attachment; filename='+zipfilename)
 
-        return content
 
+        # iterate over the temporary file object, returning it to the client
+        fp = open(zip_path, 'rb')
+        while True:
+            data = fp.read(RESPONSE_BLOCK_SIZE)
+            if data:
+                self.context.REQUEST.RESPONSE.write(data)
+            else:
+                break
+        fp.close()
+        # temporary measure to see the file object...
+        os.rename(zip_path, zip_path + "_TEMP")
+        return
     
 
 

@@ -18,9 +18,9 @@ msgstr ""
 msgid "A description which will be given to each file in the ZIP archive."
 msgstr "在壓縮檔資料庫中將會給每個檔案敘述。"
 
-#. Default: "All files in the course will be exported in .zip file format."
+#. Default: "All files in the folder will be exported in .zip file format."
 #: ./browser/export_widget.pt:10
-msgid "All files in the course will be exported in .zip file format."
+msgid "All files in the folder will be exported in .zip file format."
 msgstr "所有在課程中的檔案都會以.zip壓縮檔案的格式匯出。"
 
 #: ./browser/zipexport.py:63
@@ -31,9 +31,9 @@ msgstr "所有在檔案夾中的檔案都會以.zip壓縮檔案的格式匯出�
 msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
 msgstr "也稱為關鍵字、標籤、或標記。能幫您分類您的內容。每個分類都應該要在不同行上。"
 
-#. Default: "Check this box to overwrite existing files with the same name."
+#. Default: "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
 #: ./browser/interfaces.py:53
-msgid "Check this box to overwrite existing files with the same name."
+msgid "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
 msgstr "點擊此欄將覆寫已存在的同名文件"
 
 #: ./browser/zipfiletransportprefs.py:108
@@ -69,7 +69,7 @@ msgid "Folder Type"
 msgstr "檔案夾類型"
 
 #: ./browser/interfaces.py:58
-msgid "If selected, this item will not appear in the navigation tree."
+msgid "If selected, imported item(s) will not appear in the navigation tree."
 msgstr "若選取，這個物件將不會出現在導航樹中"
 
 #: ./browser/zipfiletransportprefs.py:37
@@ -100,28 +100,28 @@ msgid "Overwrite"
 msgstr "覆寫"
 
 #: ./browser/interfaces.py:64
-msgid "Select the ZIP archive file to be uploaded by clicking the 'Browser' button."
+msgid "Select the ZIP archive file to be imported."
 msgstr "點擊「瀏覽器」按鈕，以選擇上傳之壓縮檔資料庫檔案"
 
 #: ./browser/zipfiletransportprefs.py:38
-msgid "Set the image type here. Images imported via ZipFile Transport will be instantiated as an object of this type."
+msgid "Set the image type here. Images imported via ZipFileTransport will be instantiated as an object of this type."
 msgstr "選擇您的圖片格式。由Zip檔案傳輸所匯入的圖片將會作為這類物件的範例。"
 
 #: ./browser/zipfiletransportprefs.py:48
-msgid "Set your document type here. Documents imported via ZipFile Transport will be instantiated as an object of this type."
+msgid "Set your document type here. Documents imported via ZipFileTransport will be instantiated as an object of this type."
 msgstr "選擇您的文件格式。由Zip檔案傳輸所匯入的文件將會作為這類物件的範例。"
 
 #: ./browser/zipfiletransportprefs.py:43
-msgid "Set your file type here. Files imported via ZipFile Transport will be instantiated as an object of this type"
+msgid "Set your file type here. Files imported via ZipFileTransport will be instantiated as an object of this type"
 msgstr "由此選擇您的檔案格式。由Zip檔案傳輸所匯入的檔案將會作為這類物件的範例。"
 
 #: ./browser/zipfiletransportprefs.py:53
-msgid "Set your folderish type here. Folders imported via ZipFile Transport will be instantiated as an object of this type"
+msgid "Set your folderish type here. Folders imported via ZipFileTransport will be instantiated as an object of this type"
 msgstr "由此選擇您檔案夾的格式。由Zip檔案所匯入的檔案夾將會作為這類物件的範例。"
 
-#. Default: "The following files will be exported in .zip file format."
+#. Default: "The following files will be exported in .zip file format:"
 #: ./browser/export_widget.pt:14
-msgid "The following files will be exported in .zip file format."
+msgid "The following files will be exported in .zip file format:"
 msgstr "以下的檔案將會由zip檔案格式匯出"
 
 #: ./browser/interfaces.py:33
@@ -129,7 +129,7 @@ msgid "The name of the file downloaded to your local machine."
 msgstr "下載至您電腦中的檔案名稱。"
 
 #: ./browser/interfaces.py:44
-msgid "The names of people that have contributed to this item.  Each contributor should be on a separate line."
+msgid "The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."
 msgstr "對於此物件有貢獻的人名。每位貢獻者都應該列於不同行上。"
 
 #: ./browser/zipimport.py:94
@@ -146,11 +146,11 @@ msgid "Zip File Export"
 msgstr "Zip檔案匯出"
 
 #: ./browser/zipfiletransportprefs.py:110
-msgid "ZipFile Transport Settings"
+msgid "ZipFileTransport Settings"
 msgstr "Zip檔案傳輸設定"
 
 #: ./browser/zipfiletransportprefs.py:107
-msgid "ZipFile Transport Settings Form"
+msgid "ZipFileTransport Settings Form"
 msgstr "Zip檔案傳輸設定表格"
 
 #. Default: "ZipFileTransport"

@@ -73,7 +73,7 @@ class IZipFileTransportUtility(Interface):
         """
         
     def _getAllObjectsData(self, objects_listing, context_path):
-        """ Get all of the Object """
+        """ Get the path to a file containing all object data """
     
     def _objImplementsInterface(self, obj, interfaceClass):
         """

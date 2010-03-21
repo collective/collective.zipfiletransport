@@ -14,8 +14,8 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ZipFileTransport\n"
 
-#. Default: "Zip File Transport"
+#. Default: "ZipFileTransport"
 #: ./profiles/default/controlpanel.xml
-msgid "Zip File Transport"
+msgid "ZipFileTransport"
 msgstr ""
 

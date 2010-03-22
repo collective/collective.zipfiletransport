@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.2.0
+----------------
+
+  * Added German translation
+  * Added import/export support for handling filenames/content with unicode
+characters
+  * Added folder_contents override to show import button in empty folder
+
+
 2.1.3
 ----------------
 

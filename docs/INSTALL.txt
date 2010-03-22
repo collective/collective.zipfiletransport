@@ -34,6 +34,7 @@ recipe to manage your project, you can do this:
     ...
     zcml =
         collective.zipfiletransport
+        collective.zipfiletransport-overrides
         
   * Re-run buildout, e.g. with:
   

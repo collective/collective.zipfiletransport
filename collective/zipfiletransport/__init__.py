@@ -40,16 +40,17 @@ try:
 except ImportError:
     CustomizationPolicy = None
 
-from Globals import package_home
-from Products.CMFCore import utils as cmfutils
-from Products.CMFCore import permissions
-from Products.CMFCore import DirectoryView
-from Products.CMFPlone.utils import ToolInit
-from Products.Archetypes.atapi import *
-from Products.Archetypes import listTypes
-from Products.Archetypes.utils import capitalize
-from zope.i18nmessageid import MessageFactory
 from AccessControl import allow_module
+from Globals import package_home
+from Products.Archetypes import listTypes
+from Products.Archetypes.atapi import *
+from Products.Archetypes.utils import capitalize
+from Products.CMFCore import DirectoryView
+from Products.CMFCore import permissions
+from Products.CMFCore import utils as cmfutils
+from Products.CMFPlone.utils import ToolInit
+from zope.i18nmessageid import MessageFactory
+import utilities
 
 ZipFileTransportMessageFactory = MessageFactory('ZipFileTransport')
 allow_module('collective.zipfiletransport.ZipFileTransportMessageFactory')
@@ -81,4 +82,5 @@ def initialize(context):
     if CustomizationPolicy and hasattr(CustomizationPolicy, 'register'):
         CustomizationPolicy.register(context)
         print 'Customization policy for ZipFileTransport installed'
+
 

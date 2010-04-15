@@ -28,8 +28,6 @@ from zope.app.form.browser.textwidgets import FileWidget
 from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
 from collective.zipfiletransport.browser.interfaces import IImport
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
-import string
-
 
 
 class ImportFormAdapter(object):
@@ -91,12 +89,15 @@ class ImportForm(EditForm):
     form_fields['filename'].custom_widget = FileWidget
 
     label = _(u'Import Content')
-    description = _(u"This form will import content from files contained in a .zip file, and will create new objects")
+    description = _(u"This form will import content from files contained in "
+                    u"a .zip file, and will create new objects")
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.zft_util = getUtility(IZipFileTransportUtility)
+        self.zft_util = getUtility(
+                            IZipFileTransportUtility, 
+                            name="zipfiletransport")
 
     @action(_(u'Import'))
     def action_import(self, action, data):
@@ -107,7 +108,15 @@ class ImportForm(EditForm):
         excludefromnav = self.context.REQUEST.has_key('form.excludefromnav')
         categories = self.context.REQUEST['form.categories']
 
-        self.zft_util.importContent(file=file_obj, context=self.context, description=description, contributors=contributors, overwrite=overwrite, categories=categories, excludefromnav=excludefromnav )
+        self.zft_util.importContent(
+                                file=file_obj, 
+                                context=self.context, 
+                                description=description, 
+                                contributors=contributors, 
+                                overwrite=overwrite, 
+                                categories=categories, 
+                                excludefromnav=excludefromnav,
+                                )
         
         self.request.response.redirect('./folder_contents')
 

@@ -20,50 +20,64 @@
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
-from Products.CMFCore.utils import getToolByName
-from OFS.SimpleItem import SimpleItem
-from Products.ATContentTypes import interfaces
+import unicodedata
 from os import close
 from os.path import split, splitext
-from zipfile import ZipFile, ZIP_DEFLATED
 from urllib import unquote
-from zope.interface import implements
-from interfaces import IZipFileTransportUtility
 
+from zope.component import queryUtility
+from zope.interface import implements
+try:
+    from zope.site.hooks import getSite
+except ImportError:
+    from zope.app.component.hooks import getSite
+
+from OFS.SimpleItem import SimpleItem
+
+from Products.ATContentTypes import interfaces
+from Products.CMFCore.utils import getToolByName
 
 from plone.i18n.normalizer.interfaces import IURLNormalizer
-from zope.component import queryUtility
-
-import unicodedata
+from zipfile import ZipFile, ZIP_DEFLATED
+from interfaces import IZipFileTransportUtility
 
 class ZipFileTransportUtility(SimpleItem):
     """ ZipFileTransport Utility """
 
     implements(IZipFileTransportUtility)
     
-        
     # Import content to a zip file.
     #
-    # file - The file input is a string of the full path name where the zip file is saved. 
-    # context - Context refers to the container object where the objects will be uploaded to.
-    # desc - Description is the description to be attached to the uploaded objects.
-    # contributors - Contributors is the contributors message to be attached to the uploaded objects.
+    # file          - The file input is a string of the full path name where 
+    #                   the zip file is saved. 
+    # context       - Context refers to the container object where the objects 
+    #                   will be uploaded to.
+    # desc          - Description is the description to be attached to the 
+    #                   uploaded objects.
+    # contributors - Contributors is the contributors message to be attached 
+    #                   to the uploaded objects.
 
-    def importContent(self, file, context=None, description=None, contributors=None, categories=None, overwrite=False, excludefromnav=False):
-        """
-        Import content from a zip file, creating the folder structure within a ZODB hierarchy.
+    def importContent(
+                    self, 
+                    file, 
+                    context,
+                    description=None, 
+                    contributors=None, 
+                    categories=None, 
+                    overwrite=False, 
+                    excludefromnav=False,
+                    ):
+        """ Import content from a zip file, creating the folder structure 
+            within a ZODB hierarchy.
         """
         self.bad_folders = []        
- 
         zf=ZipFile(file, 'r')
- 
         files = [file.filename for file in zf.filelist]
         
         if len(files) < 1:
             return ('failure','The zip file was empty')        
         
         for current_file in files:
-            
             # If the current file is a folder move to the next file.
             if current_file[-1] == '/':
                 continue
@@ -78,11 +92,10 @@ class ZipFileTransportUtility(SimpleItem):
             
             normalized_file_name = queryUtility(IURLNormalizer).normalize(file_name)
             
-            
-            # Checks to make sure that the file path does not contain any previouslsy found bad folders.
+            # Checks to make sure that the file path does not contain any 
+            # previouslsy found bad folders.
             if not self._checkFilePath(current_file, path_as_list):
                 continue
-  
 
             folder = self._createFolderStructure(path_as_list, context, excludefromnav)
             
@@ -116,8 +129,6 @@ class ZipFileTransportUtility(SimpleItem):
         zf.close()   
 
 
-
-
     def _checkFilePath(self, current_file, path_as_list):
         # Make sure file isn't in a bad folder, if it is skip to the next one.
         
@@ -128,14 +139,15 @@ class ZipFileTransportUtility(SimpleItem):
         
 
     def _createFolderStructure(self, path_as_list, parent, excludefromnav):
-        """ Creates the folder structure given a path_part and parent object """
-
-        props = getToolByName(self.context, 'portal_properties')
+        """ Creates the folder structure given a path_part and parent object 
+        """
+        props = getToolByName(parent, 'portal_properties')
         folder_type = props.zipfile_properties.folder_type
+        catalog = getToolByName(parent, 'portal_catalog')
+        factory = getToolByName(parent, 'portal_factory')
 
         file_name = self._convertToUnicode(path_as_list[-1])
         file_name = unicodedata.normalize('NFC', file_name )
-
         
         # Create the folder structure
         for i in range( len(path_as_list) - 1 ):
@@ -145,7 +157,7 @@ class ZipFileTransportUtility(SimpleItem):
             
             current_path = '/'.join(path_as_list[:i+1])
             
-            # If not in the current folder, then just get the folder
+            # If in the current folder, then just get the folder
             if normalized_path_part not in parent.objectIds():
                 # Checks to make sure that the folder is valid.            
                 if not parent.checkIdAvailable(id=normalized_path_part):
@@ -157,8 +169,8 @@ class ZipFileTransportUtility(SimpleItem):
                 foldr.setTitle(path_part)
                 if excludefromnav:
                     foldr.setExcludeFromNav(True)
-                foldr = parent.portal_factory.doCreate(foldr, normalized_path_part)
-                self.portal_catalog.reindexObject(foldr, self.portal_catalog.indexes())
+                foldr = factory.doCreate(foldr, normalized_path_part)
+                catalog.reindexObject(foldr, catalog.indexes())
                 
             else:
                 foldr = getattr(parent, normalized_path_part)
@@ -169,10 +181,8 @@ class ZipFileTransportUtility(SimpleItem):
            
 
     def _createObject(self, filepath, fdata, parent):
-        """
-        """ 
-
-        props = getToolByName(self.context, 'portal_properties')
+        """ """ 
+        props = getToolByName(parent, 'portal_properties')
         image_type = props.zipfile_properties.image_type
         file_type = props.zipfile_properties.file_type
         doc_type = props.zipfile_properties.doc_type
@@ -211,16 +221,18 @@ class ZipFileTransportUtility(SimpleItem):
         elif newObjType == file_type:
             obj.setFile(fdata)
 
-        obj = parent.portal_factory.doCreate(obj, filename)
+        factory = getToolByName(parent, 'portal_factory')
+        catalog = getToolByName(parent, 'portal_catalog')
+        obj = factory.doCreate(obj, filename)
         obj.setFormat(mimetype)
-        self.portal_catalog.reindexObject(obj, self.portal_catalog.indexes())
+        catalog.reindexObject(obj, catalog.indexes())
         return obj
     
 
     def _getFileObjectType(self, major, mimetype):
         """
         """        
-        props = getToolByName(self.context, 'portal_properties')
+        props = getToolByName(getSite(), 'portal_properties')
         image_type = props.zipfile_properties.image_type
         file_type = props.zipfile_properties.file_type
         doc_type = props.zipfile_properties.doc_type
@@ -236,41 +248,44 @@ class ZipFileTransportUtility(SimpleItem):
     
 
     def getTime(self,id):
-        """ Returns the gmtime appended to the an id, used to obtain a unique id for the logFile object """
+        """ Returns the gmtime appended to the an id, used to obtain a unique 
+            id for the logFile object 
+        """
         import time
         uid = id
         for tp in time.gmtime():
             uid += str(tp)
         return uid
 
-    #
     # Export content to a zip file.
     # 
-    # context - Container refers to the container of all the objects that are to be exported.
-    # obj_paths - Refers to a list of paths of either objects or contexts that will be included in the zip file.
+    # context   - Container refers to the container of all the objects that 
+    #               are to be exported.
+    # obj_paths - Refers to a list of paths of either objects or contexts 
+    #               that will be included in the zip file.
     # filename - Refers to the fullpath filename of the exported zip file.
 
     def exportContent(self, context, obj_paths=None, filename=None):
-        """
-        Export content to a zip file.
+        """ Export content to a zip file.
         """      
         # create a filename without illegal characters
         objects_list = self._createObjectList(context, obj_paths)
         context_path = str( context.virtual_url_path() )
-        zip_path = self._getAllObjectsData(objects_list, context_path)        
+        zip_path = self._getAllObjectsData(context, objects_list, context_path)        
         return zip_path
 
     def _createObjectList(self, context, obj_paths=None, state=None):
-        """
-        Create a list of objects by iteratively descending a folder tree...or trees (if obj_paths is set).
+        """ Create a list of objects by iteratively descending a folder 
+            tree... or trees (if obj_paths is set).
         """
         objects_list=[]
         
         if obj_paths:
-            portal = getToolByName(self, 'portal_url', None).getPortalObject() 
+            portal = getToolByName(context, 'portal_url').getPortalObject() 
             for path in obj_paths:
                 obj = portal.restrictedTraverse(path)      
-                #if this is a folder, then add everything in this folder to the obj_paths list otherwise simply add the object.
+                # if this is a folder, then add everything in this folder to 
+                # the obj_paths list otherwise simply add the object.
                 if obj.isPrincipiaFolderish:
                     self._appendItemsToList(folder=obj, list=objects_list,state=state)
                 elif obj not in objects_list:
@@ -286,17 +301,14 @@ class ZipFileTransportUtility(SimpleItem):
         return objects_list
 
     def generateSafeFileName(self, file_name): 
+        """ Remove illegal characters from the exported filename.
         """
-        Remove illegal characters from the exported filename.
-        """
-        
-        # remove invalid characters from file names
         file_name = unquote(file_name)
         return file_name
 
-    def _getAllObjectsData(self, objects_listing, context_path):
-        """
-        Returns the data in all files with a content object to be placed in a zipfile
+    def _getAllObjectsData(self, context, objects_listing, context_path):
+        """ Returns the data in all files with a content object to be placed
+            in a zipfile
         """
         # Use temporary IO object instead of writing to filesystem.
         import tempfile
@@ -308,7 +320,8 @@ class ZipFileTransportUtility(SimpleItem):
         for obj in objects_listing:
             object_path = str(obj.virtual_url_path())
             
-            if self._objImplementsInterface(obj,interfaces.IATFile) or self._objImplementsInterface(obj,interfaces.IATImage):
+            if self._objImplementsInterface(obj,interfaces.IATFile) or \
+                        self._objImplementsInterface(obj,interfaces.IATImage):
                 file_data = str(obj.data)
                 object_path = object_path.replace(context_path + '/', '')
                 
@@ -355,15 +368,16 @@ class ZipFileTransportUtility(SimpleItem):
 
             # start point for object path, adding 1 removes the initial '/'
             object_path = self.generateSafeFileName(object_path)
+            catalog = getToolByName(context, 'portal_catalog')
 
             if object_path: 
-                #reconstruct path with filename, restores non-ascii characters in filenames
+                # reconstruct path with filename, restores non-ascii 
+                # characters in filenames
                 i = 0
                 filename_path = []
                 while i < len(object_path.split('/')):
                     #store each part
-                    
-                    filename_path +=  [self.context.portal_catalog.searchResults(path={'query':(obj.virtual_url_path()), })[0].Title, ]
+                    filename_path += [catalog.searchResults(path={'query':(obj.virtual_url_path()),})[0].Title,]
                     obj = obj.aq_inner.aq_parent
                     i += 1        
                 if len(filename_path) > 1:
@@ -371,7 +385,8 @@ class ZipFileTransportUtility(SimpleItem):
                     filename_path = '/'.join(filename_path)
                 else:
                     filename_path = filename_path[0] 
-                if 'Windows' in self.request['HTTP_USER_AGENT']:
+
+                if 'Windows' in context.REQUEST['HTTP_USER_AGENT']:
                     filename_path = filename_path.decode('utf-8').encode('cp437')
                 zipFile.writestr(filename_path, file_data)                
 
@@ -403,9 +418,10 @@ class ZipFileTransportUtility(SimpleItem):
         return lsa
 
     def _appendItemsToList(self, folder, list, state):
-        """
-        """
-        brains = folder.portal_catalog.searchResults(path={'query':('/'.join(folder.getPhysicalPath())+'/'), })
+        """ """
+        brains = folder.portal_catalog.searchResults(
+                    path={'query':('/'.join(folder.getPhysicalPath())+'/'),}
+                    )
         
         for brain_object in brains:
             obj = brain_object.getObject()

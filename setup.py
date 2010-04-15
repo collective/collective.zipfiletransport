@@ -29,7 +29,8 @@ setup(name='collective.zipfiletransport',
       version=version,
       description="This tool is used to import and export zip files.",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open(os.path.join("docs", "HISTORY.txt")).read() +
+                       open(os.path.join("docs", "CONTRIBUTORS.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
@@ -47,9 +48,9 @@ setup(name='collective.zipfiletransport',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
       ],
       entry_points="""
-      # -*- Entry points: -*-
+        [z3c.autoinclude.plugin]
+        target = plone
       """,
       )

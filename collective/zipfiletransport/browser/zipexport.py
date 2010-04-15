@@ -63,7 +63,9 @@ class ExportForm(EditForm):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.zft_util = getUtility(IZipFileTransportUtility)
+        self.zft_util = getUtility(
+                            IZipFileTransportUtility, 
+                            name="zipfiletransport")
 
 
     @action(_(u'Export'))
@@ -88,17 +90,24 @@ class ExportForm(EditForm):
         if self.context.portal_membership.isAnonymousUser() != 0:
             return
 
-
         zipfilename = self.zft_util.generateSafeFileName(filename)
         #Detect OS
         zipfilename = filename.encode('utf-8')
 
-        zip_path = self.zft_util.exportContent(context=self.context,obj_paths=obj_paths, filename=filename)
+        zip_path = self.zft_util.exportContent(
+                                context=self.context,
+                                obj_paths=obj_paths, 
+                                filename=filename)
 
-        self.context.REQUEST.RESPONSE.setHeader('content-type', 'application/zip')
-        self.context.REQUEST.RESPONSE.setHeader('content-length', str(os.stat(zip_path)[6]))
-        self.context.REQUEST.RESPONSE.setHeader('Content-Disposition',' attachment; filename='+zipfilename)
-
+        self.context.REQUEST.RESPONSE.setHeader(
+                                    'content-type', 
+                                    'application/zip')
+        self.context.REQUEST.RESPONSE.setHeader(
+                                    'content-length', 
+                                    str(os.stat(zip_path)[6]))
+        self.context.REQUEST.RESPONSE.setHeader(
+                                    'Content-Disposition',
+                                    ' attachment; filename='+zipfilename)
 
         # iterate over the temporary file object, returning it to the client
         fp = open(zip_path, 'rb')

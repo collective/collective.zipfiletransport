@@ -34,31 +34,49 @@ class IExport(Interface):
 class IImport(Interface):
     """ Import Form """
 
-    description = schema.Text(title=_(u"Import Description"),
-                              description=_(u"A description which will be given to each file in the ZIP archive."),
-                              required=False)
+    description = schema.Text(
+                        title=_(u"Import Description"),
+                        description=_(
+                            u"A description which will be given to each file "
+                            u"in the ZIP archive."),
+                        required=False)
 
-    contributors = schema.Text(title=_(u"Contributors"),
-                              description=_(u"The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."),
-                              required=False)
+    contributors = schema.Text(
+                        title=_(u"Contributors"),
+                        description=_(
+                            u"The names of people that have contributed to "
+                            u"imported item(s).  Each contributor should be "
+                            u"on a separate line."),
+                        required=False)
 
-    categories = schema.Text(title=_(u"Keyword Categories"),
-                              description=_(u"Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."),
-                              required=False)
+    categories = schema.Text(
+                        title=_(u"Keyword Categories"),
+                        description=_(
+                            u"Also known as keywords, tags or labels, these "
+                            u"help you categorize your content. Each category "
+                            u"should be on a separate line."),
+                        required=False)
 
+    overwrite = schema.Bool(
+                        title=_(u"Overwrite"),
+                        description=_(
+                            u"Check this box to overwrite existing files with "
+                            u"the same name. If left unchecked, same named "
+                            u"files will not import."),
+                        default=False, 
+                        required=False)
 
-    overwrite = schema.Bool(title=_(u"Overwrite"),
-                            description=_(u"Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."),
-                            default=False, 
-                            required=False)
+    excludefromnav = schema.Bool(
+                        title=_(u"Exclude from left navigation"),
+                        description=_(
+                            u"If selected, imported item(s) will not appear "
+                            u"in the navigation tree."),
+                        default=False,
+                        required=False)
 
-    excludefromnav = schema.Bool(title=_(u"Exclude from left navigation"),
-                                 description=_(u"If selected, imported item(s) will not appear in the navigation tree."),
-                                 default=False,
-                                 required=False)
-
-
-    filename = ZipFileLine(title=_(u"Zip File"),
-                           description=_(u"Select the ZIP archive file to be imported."),
-                           required=True)
+    filename = ZipFileLine(
+                        title=_(u"Zip File"),
+                        description=_(
+                            u"Select the ZIP archive file to be imported."),
+                        required=True)
 

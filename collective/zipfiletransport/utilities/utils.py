@@ -38,6 +38,7 @@ from Products.ATContentTypes import interfaces
 from Products.CMFCore.utils import getToolByName
 
 from plone.i18n.normalizer.interfaces import IURLNormalizer
+
 from zipfile import ZipFile, ZIP_DEFLATED
 from interfaces import IZipFileTransportUtility
 
@@ -56,7 +57,6 @@ class ZipFileTransportUtility(SimpleItem):
     #                   uploaded objects.
     # contributors - Contributors is the contributors message to be attached 
     #                   to the uploaded objects.
-
     def importContent(
                     self, 
                     file, 
@@ -103,11 +103,10 @@ class ZipFileTransportUtility(SimpleItem):
             if not folder:
                 continue
 
-            id_available = context.checkIdAvailable(id=normalized_file_name)
+            id_available = folder.checkIdAvailable(id=normalized_file_name)
             
             # Create an object if everything looks good
-            if id_available or (overwrite and not id_available):
-                
+            if id_available or overwrite:
                 fdata = zf.read(current_file)
                 
                 if not id_available:
@@ -130,8 +129,9 @@ class ZipFileTransportUtility(SimpleItem):
 
 
     def _checkFilePath(self, current_file, path_as_list):
-        # Make sure file isn't in a bad folder, if it is skip to the next one.
-        
+        """ Make sure file isn't in a bad folder, if it is skip to the next 
+            one.
+        """
         for bad_folder in self.bad_folders:
             if current_file.find(bad_folder) == 0:
                 return False
@@ -153,8 +153,8 @@ class ZipFileTransportUtility(SimpleItem):
         for i in range( len(path_as_list) - 1 ):
             path_part = self._convertToUnicode(path_as_list[i])
             path_part = unicodedata.normalize('NFC', path_part)
-            normalized_path_part = queryUtility(IURLNormalizer).normalize(path_part)
-            
+            normalized_path_part = \
+                queryUtility(IURLNormalizer).normalize(path_part)
             current_path = '/'.join(path_as_list[:i+1])
             
             # If in the current folder, then just get the folder
@@ -176,7 +176,6 @@ class ZipFileTransportUtility(SimpleItem):
                 foldr = getattr(parent, normalized_path_part)
                 
             parent = foldr
-            
         return parent
            
 
@@ -197,7 +196,10 @@ class ZipFileTransportUtility(SimpleItem):
             mimetype = ftype.normalized()
             newObjType = self._getFileObjectType(ftype.major(), mimetype)        
         else:
-            newObjType = self._getFileObjectType('application', 'application/octet-stream')
+            newObjType = self._getFileObjectType(
+                                        'application', 
+                                        'application/octet-stream'
+                                        )
             mimetype = 'application/octet-stream'
         nm = filepath.split('/')
         
@@ -210,7 +212,6 @@ class ZipFileTransportUtility(SimpleItem):
             parent.invokeFactory(type_name=newObjType, id=filename)
             obj = getattr(parent, filename)
             obj.setTitle(splitext(filename)[0])
-                        
         else:
             obj = getattr(parent, filename)
         
@@ -230,8 +231,7 @@ class ZipFileTransportUtility(SimpleItem):
     
 
     def _getFileObjectType(self, major, mimetype):
-        """
-        """        
+        """ """        
         props = getToolByName(getSite(), 'portal_properties')
         image_type = props.zipfile_properties.image_type
         file_type = props.zipfile_properties.file_type
@@ -436,7 +436,8 @@ class ZipFileTransportUtility(SimpleItem):
         return list
     
     def _convertToUnicode(self, bytestring):
-        # Convert bytestring into unicode object
+        """ Convert bytestring into unicode object
+        """
         # *nix encoding
         try:
             unicode_text = unicode(bytestring, 'utf-8')
@@ -461,7 +462,8 @@ class ZipFileTransportUtility(SimpleItem):
              return []
         
     def getZipFileInfo(self, zfile):
-         """ Gets info about the files in a Zip archive."""
+         """ Gets info about the files in a Zip archive.
+         """
          mt = self.mimetypes_registry
          f = ZipFile(zfile)
          fileinfo = []
@@ -472,7 +474,8 @@ class ZipFileTransportUtility(SimpleItem):
          return fileinfo
     
     def getZipFile(self, zfile, filename):
-         """ Gets a file from the Zip archive."""
+         """ Gets a file from the Zip archive.
+         """
          mt = self.mimetypes_registry
          f = ZipFile(zfile)
          finfo = f.getinfo(filename)
@@ -496,7 +499,3 @@ class ZipFileTransportUtility(SimpleItem):
     def get_zipfile_name(self):
         return 'Test.zip'
         
-                    
-
-
-

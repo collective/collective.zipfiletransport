@@ -25,8 +25,7 @@ class TestChat(TestCase):
         try:
             testfile = open(file)
         except:
-            file = '/'.join(['..',
-                            '..',
+            file = '/'.join([
                             'collective',
                             'zipfiletransport',
                             'tests',
@@ -110,8 +109,10 @@ class TestChat(TestCase):
         obj_paths = ['/'.join(self.folder.getPhysicalPath())]
         zip_path = self.zft_util.exportContent(self.folder, obj_paths)
         fp = open(zip_path, 'rb')
+
         # XXX: Add additional tests...
-        self.assertEquals(fp.errors, None)
+        # Only works in Plone4
+        # self.assertEquals(fp.errors, None) 
         
 
 def test_suite():

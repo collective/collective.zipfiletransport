@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: ru\n"
+"Language-Name: Russian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: ZipFileTransport\n"
+
+#: ./browser/interfaces.py:40
+msgid "A description which will be given to each file in the ZIP archive."
+msgstr ""
+
+#. Default: "All files in the folder will be exported in .zip file format."
+#: ./browser/export_widget.pt:10
+msgid "All files in the folder will be exported in .zip file format."
+msgstr ""
+
+#: ./browser/zipexport.py:63
+msgid "All files in the folder will be exported in .zip file format"
+msgstr ""
+
+#: ./browser/interfaces.py:48
+msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
+msgstr ""
+
+#. Default: "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
+#: ./browser/interfaces.py:53
+msgid "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:108
+msgid "Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten the default object types."
+msgstr ""
+
+#: ./browser/interfaces.py:43
+msgid "Contributors"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:47
+msgid "Document Type"
+msgstr ""
+
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
+#: ./browser/zipexport.py:72
+msgid "Export"
+msgstr ""
+
+#: ./browser/zipexport.py:62
+msgid "Export Content"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:42
+msgid "File Type"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:52
+msgid "Folder Type"
+msgstr ""
+
+#: ./browser/interfaces.py:58
+msgid "If selected, imported item(s) will not appear in the navigation tree."
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:37
+msgid "Image Type"
+msgstr ""
+
+#. Default: "Import"
+#: ./browser/zipimport.py:101
+msgid "Import"
+msgstr ""
+
+#. Default: "Import Content"
+#: ./browser/zipimport.py:93
+msgid "Import Content"
+msgstr ""
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
+
+#. Default: "Overwrite"
+#: ./browser/interfaces.py:52
+msgid "Overwrite"
+msgstr ""
+
+#: ./browser/interfaces.py:64
+msgid "Select the ZIP archive file to be imported."
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:38
+msgid "Set the image type here. Images imported via ZipFileTransport will be instantiated as an object of this type."
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:48
+msgid "Set your document type here. Documents imported via ZipFileTransport will be instantiated as an object of this type."
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:43
+msgid "Set your file type here. Files imported via ZipFileTransport will be instantiated as an object of this type"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:53
+msgid "Set your folderish type here. Folders imported via ZipFileTransport will be instantiated as an object of this type"
+msgstr ""
+
+#. Default: "The following files will be exported in .zip file format:"
+#: ./browser/export_widget.pt:14
+msgid "The following files will be exported in .zip file format:"
+msgstr ""
+
+#: ./browser/interfaces.py:33
+msgid "The name of the file downloaded to your local machine."
+msgstr ""
+
+#: ./browser/interfaces.py:44
+msgid "The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."
+msgstr ""
+
+#: ./browser/zipimport.py:94
+msgid "This form will import content from files contained in a .zip file, and will create new objects"
+msgstr ""
+
+#. Default: "Zip File"
+#: ./browser/interfaces.py:63
+msgid "Zip File"
+msgstr ""
+
+#: ./browser/interfaces.py:32
+msgid "Zip File Export"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:110
+msgid "ZipFileTransport Settings"
+msgstr ""
+
+#: ./browser/zipfiletransportprefs.py:107
+msgid "ZipFileTransport Settings Form"
+msgstr ""
+
+#. Default: "ZipFileTransport"
+#: ./profiles/default/actionicons.xml
+msgid "ZipFileTransport"
+msgstr ""
+

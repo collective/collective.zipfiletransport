@@ -20,37 +20,21 @@
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
-from setuptools import setup, find_packages
-import os
+from zope.app.form.browser.textwidgets import TextWidget
 
-version = '2.2.1-final'
+class ExportWidget(TextWidget):
+    """ Widget for Export Form. """
 
-setup(name='collective.zipfiletransport',
-      version=version,
-      description="This tool is used to import and export zip files.",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read() +
-                       open(os.path.join("docs", "CONTRIBUTORS.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
-      classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
-      keywords='zipfile bulk upload',
-      author='enPraxis',
-      author_email='info@enpraxis.net',
-      url='http://plone.org/products/zipfiletransport',
-      license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['collective'],
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          'setuptools',
-      ],
-      entry_points="""
-        [z3c.autoinclude.plugin]
-        target = plone
-      """,
-      )
+    def __init__(self, field, request):
+        """ Initialize the widget.  """
+        super(ExportWidget, self).__init__(field, request)
+
+
+    def __call__(self):
+        widgettext = TextWidget.__call__(self)
+        widgettext += self.context.context.context.restrictedTraverse('@@export_widget')()        
+        return widgettext
+
+
+
+

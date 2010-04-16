@@ -1,0 +1,57 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"           
+    i18n_domain="ZipFileTransport">
+
+  <browser:page
+      name="export_form"
+      for="*"
+      class=".zipexport.ExportForm"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="import_form"
+      for="*"
+      class=".zipimport.ImportForm"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="export_widget"
+      for="*"
+      template="export_widget.pt"
+      permission="zope2.View"
+      />
+
+  <adapter factory=".zipexport.ExportFormAdapter"
+      for="Products.ATContentTypes.content.folder.ATFolder"/>
+  <adapter factory=".zipexport.ExportFormAdapter"
+      for="Products.CMFPlone.Portal.PloneSite"/>
+
+  <adapter factory=".zipimport.ImportFormAdapter"
+      for="Products.ATContentTypes.content.folder.ATFolder"/>
+  <adapter factory=".zipimport.ImportFormAdapter"
+      for="Products.CMFPlone.Portal.PloneSite"/>
+
+  <adapter factory=".zipfiletransportprefs.ZipFileTransportControlPanelAdapter" />
+
+  <browser:page
+      name="zipfile-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".zipfiletransportprefs.ZipFileTransportPrefsForm"
+      permission="cmf.ManagePortal"
+      />
+
+  <!-- five:traversable has been removed in Zope 2.12
+       and has been unnecessary since zope 2.10.
+       Using zcml:condition="not-have plone4" doesn't fix this...
+
+    <five:traversable class="OFS.Application.Application" /> 
+    <five:traversable class="Products.CMFCore.PortalObject.PortalObjectBase" />
+  -->
+
+</configure>
+

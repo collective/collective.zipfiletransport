@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ZipFileTransport">
+
+<body>
+
+<tal:block tal:define="paths request/paths|nothing ">
+
+<p tal:condition="python:not paths" i18n:translate="">
+  All files in the folder will be exported in .zip file format.
+</p>
+<tal:block tal:condition="python: paths">
+ <p i18n:translate="">The following files will be exported in .zip file format:</p>
+  <ul>
+  <tal:block tal:repeat="path paths">
+    <li tal:content="path" />
+  </tal:block>
+  </ul>
+  <input tal:repeat="path paths"
+	 type="hidden"
+	 name="form.obj_paths:list"
+	 value=""
+	 tal:attributes="value path"
+	 />
+</tal:block>
+
+</tal:block>
+
+</body>
+
+</html>

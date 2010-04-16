@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZipFileTransport Tool\n"
+"POT-Creation-Date: 2009-08-06 22:29+0000\n"
+"PO-Revision-Date: 2009-07-29 17:07-0700\n"
+"Last-Translator: Jessie Zhu <jessie.zhu@usu.edu>\n"
+"Language-Team: Mark <gdzhao@gse.pku.edu.cn>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: zh\n"
+"Language-Name: Simplified Chinese\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: ZipFileTransport\n"
+
+#: ./browser/interfaces.py:40
+msgid "A description which will be given to each file in the ZIP archive."
+msgstr "每个文件都将给一个描述，用压缩文件"
+
+#. Default: "All files in the folder will be exported in .zip file format."
+#: ./browser/export_widget.pt:10
+msgid "All files in the folder will be exported in .zip file format."
+msgstr "在这个课程里的所有文件都将用压缩文件方式导出"
+
+#: ./browser/zipexport.py:63
+msgid "All files in the folder will be exported in .zip file format"
+msgstr "在这个文件夹的所有文件都将用压缩文件方式导出"
+
+#: ./browser/interfaces.py:48
+msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
+msgstr "所知道的关键字，标注或者书签都会帮助你分类。每类都必须在不同的行。"
+
+#. Default: "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
+#: ./browser/interfaces.py:53
+msgid "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
+msgstr "点击此栏将覆盖已存在的同名文件"
+
+#: ./browser/zipfiletransportprefs.py:108
+msgid "Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten the default object types."
+msgstr "为导出的对象设定对象类型。这些数据不能被改动，除非你的网站需要重改默认值。"
+
+#: ./browser/interfaces.py:43
+msgid "Contributors"
+msgstr "提供者"
+
+#: ./browser/zipfiletransportprefs.py:47
+msgid "Document Type"
+msgstr "文本类型"
+
+#: ./browser/interfaces.py:57
+msgid "Exclude from left navigation"
+msgstr ""
+
+#: ./browser/zipexport.py:72
+msgid "Export"
+msgstr "导出"
+
+#: ./browser/zipexport.py:62
+msgid "Export Content"
+msgstr "导出内容"
+
+#: ./browser/zipfiletransportprefs.py:42
+msgid "File Type"
+msgstr "文件类型"
+
+#: ./browser/zipfiletransportprefs.py:52
+msgid "Folder Type"
+msgstr "文件夹类型"
+
+#: ./browser/interfaces.py:58
+msgid "If selected, imported item(s) will not appear in the navigation tree."
+msgstr "如果选取，这个内容将不会在目录中出现。"
+
+#: ./browser/zipfiletransportprefs.py:37
+msgid "Image Type"
+msgstr "图像类型"
+
+#. Default: "Import"
+#: ./browser/zipimport.py:101
+msgid "Import"
+msgstr "导入"
+
+#. Default: "Import Content"
+#: ./browser/zipimport.py:93
+msgid "Import Content"
+msgstr "导入内容"
+
+#: ./browser/interfaces.py:39
+msgid "Import Description"
+msgstr ""
+
+#: ./browser/interfaces.py:47
+msgid "Keyword Categories"
+msgstr ""
+
+#. Default: "Overwrite"
+#: ./browser/interfaces.py:52
+msgid "Overwrite"
+msgstr "覆盖"
+
+#: ./browser/interfaces.py:64
+msgid "Select the ZIP archive file to be imported."
+msgstr "点击“浏览器”按钮选取压缩文件类型上传"
+
+#: ./browser/zipfiletransportprefs.py:38
+msgid "Set the image type here. Images imported via ZipFileTransport will be instantiated as an object of this type."
+msgstr "在此设定图像类型。用压缩文件传输导入的图像将被此类型初始化。"
+
+#: ./browser/zipfiletransportprefs.py:48
+msgid "Set your document type here. Documents imported via ZipFileTransport will be instantiated as an object of this type."
+msgstr "在此设定你的文本类型。"
+
+#: ./browser/zipfiletransportprefs.py:43
+msgid "Set your file type here. Files imported via ZipFileTransport will be instantiated as an object of this type"
+msgstr "在此设定你的文件类型。用压缩文件传输导入的文件将被此类型初始化。"
+
+#: ./browser/zipfiletransportprefs.py:53
+msgid "Set your folderish type here. Folders imported via ZipFileTransport will be instantiated as an object of this type"
+msgstr "在此设定你的文件夹类型。用压缩文件夹传输导入的文件将被此类型初始化。"
+
+#. Default: "The following files will be exported in .zip file format:"
+#: ./browser/export_widget.pt:14
+msgid "The following files will be exported in .zip file format:"
+msgstr "下面文件将用压缩文件方式导出"
+
+#: ./browser/interfaces.py:33
+msgid "The name of the file downloaded to your local machine."
+msgstr "文件名下载到你本地电脑。"
+
+#: ./browser/interfaces.py:44
+msgid "The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."
+msgstr "为此内容作出贡献的人的名字。每个贡献者都必须在不同的行。"
+
+#: ./browser/zipimport.py:94
+msgid "This form will import content from files contained in a .zip file, and will create new objects"
+msgstr "这个表格将从含有压缩文件的文件里导入内容，从而建立新的对象。"
+
+#. Default: "Zip File"
+#: ./browser/interfaces.py:63
+msgid "Zip File"
+msgstr "Zip文件"
+
+#: ./browser/interfaces.py:32
+msgid "Zip File Export"
+msgstr "压缩文件导出"
+
+#: ./browser/zipfiletransportprefs.py:110
+msgid "ZipFileTransport Settings"
+msgstr "压缩文件传输设定"
+
+#: ./browser/zipfiletransportprefs.py:107
+msgid "ZipFileTransport Settings Form"
+msgstr "压缩文件传输设定表格"
+
+#. Default: "ZipFileTransport"
+#: ./profiles/default/actionicons.xml
+msgid "ZipFileTransport"
+msgstr "压缩文件传输"
+

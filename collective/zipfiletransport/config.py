@@ -20,37 +20,45 @@
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
-from setuptools import setup, find_packages
-import os
 
-version = '2.2.1-final'
 
-setup(name='collective.zipfiletransport',
-      version=version,
-      description="This tool is used to import and export zip files.",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read() +
-                       open(os.path.join("docs", "CONTRIBUTORS.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
-      classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
-      keywords='zipfile bulk upload',
-      author='enPraxis',
-      author_email='info@enpraxis.net',
-      url='http://plone.org/products/zipfiletransport',
-      license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['collective'],
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          'setuptools',
-      ],
-      entry_points="""
-        [z3c.autoinclude.plugin]
-        target = plone
-      """,
-      )
+from Products.CMFCore.permissions import setDefaultRoles
+
+PROJECTNAME = "ZipFileTransport"
+
+# Check for Plone 2.1
+try:
+    from Products.CMFPlone.migrations import v2_1
+except ImportError:
+    HAS_PLONE21 = False
+else:
+    HAS_PLONE21 = True
+
+# Permissions
+DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
+setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner'))
+
+product_globals = globals()
+
+# Dependencies of Products to be installed by quick-installer
+# override in custom configuration
+DEPENDENCIES = []
+
+# Dependend products - not quick-installed - used in testcase
+# override in custom configuration
+PRODUCT_DEPENDENCIES = []
+
+# You can overwrite these two in an AppConfig.py:
+# STYLESHEETS = [{'id': 'my_global_stylesheet.css'},
+#                {'id': 'my_contenttype.css',
+#                 'expression': 'python:object.getTypeInfo().getId() == "MyType"'}]
+# You can do the same with JAVASCRIPTS.
+STYLESHEETS = []
+JAVASCRIPTS = []
+
+
+# Load custom configuration not managed by ArchGenXML
+try:
+    from collective.zipfiletransport.AppConfig import *
+except ImportError:
+    pass

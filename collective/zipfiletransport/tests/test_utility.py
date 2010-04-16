@@ -22,15 +22,6 @@ class TestChat(TestCase):
                         'zipfiletransport',
                         'tests',
                         'test_folder.zip',])
-        try:
-            testfile = open(file)
-        except:
-            file = '/'.join(['..',
-                            '..',
-                            'collective',
-                            'zipfiletransport',
-                            'tests',
-                            'test_folder.zip',])
 
         # Test Zip file import
         self.zft_util.importContent(
@@ -56,6 +47,7 @@ class TestChat(TestCase):
             ['test_image.jpeg', 'test_image.png', 'test_document.doc',
                 'test_document.pdf', 'test_document.odt', ]
         self.assertEquals(zip_folder.objectIds(), zip_folder_contents)
+
 
         # Test that the categories were applied
         for oid  in zip_folder_contents:

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-15" ?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+    <object name="simple_publication_workflow" meta_type="Workflow"/>
+    <bindings>
+        <type type_id="Image">
+            <bound-workflow workflow_id="simple_publication_workflow"/>
+        </type>
+        <type type_id="File">
+            <bound-workflow workflow_id="simple_publication_workflow"/>
+        </type>
+    </bindings>
+</object>

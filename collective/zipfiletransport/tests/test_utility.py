@@ -22,6 +22,15 @@ class TestChat(TestCase):
                         'zipfiletransport',
                         'tests',
                         'test_folder.zip',])
+        try:
+            testfile = open(file)
+        except:
+            file = '/'.join(['..',
+                            '..',
+                            'collective',
+                            'zipfiletransport',
+                            'tests',
+                            'test_folder.zip',])
 
         # Test Zip file import
         self.zft_util.importContent(

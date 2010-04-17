@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.2.2 (Unreleased)
+------------------
+
+  * Added unit tests [jcbrand]
+  * Fixed a bug causing existing files to always be overridden [jcbrand]
+  * Added Plone 4 compatibility [jcbrand]
+  * Added default workflows for Image and File [jcbrand]
+  * Register the utility via zcml and not via an import step [jcbrand]
+
 2.2.1
 ----------------
 

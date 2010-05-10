@@ -269,10 +269,8 @@ class ZipFileTransportUtility(SimpleItem):
     def exportContent(self, context, obj_paths=None, filename=None):
         """ Export content to a zip file.
         """      
-        # create a filename without illegal characters
         objects_list = self._createObjectList(context, obj_paths)
-        context_path = str( context.virtual_url_path() )
-        zip_path = self._getAllObjectsData(context, objects_list, context_path)        
+        zip_path = self._getAllObjectsData(context, objects_list)        
         return zip_path
 
     def _createObjectList(self, context, obj_paths=None, state=None):
@@ -307,18 +305,20 @@ class ZipFileTransportUtility(SimpleItem):
         file_name = unquote(file_name)
         return file_name
 
-    def _getAllObjectsData(self, context, objects_listing, context_path):
+    def _getAllObjectsData(self, context, objects_listing):
         """ Returns the data in all files with a content object to be placed
             in a zipfile
         """
-        # Use temporary IO object instead of writing to filesystem.
         import tempfile
+        # Use temporary IO object instead of writing to filesystem.
         fd, path = tempfile.mkstemp('.zipfiletransport')
         close(fd)
         
         zipFile =  ZipFile(path, 'w', ZIP_DEFLATED)
+        context_path = str(context.virtual_url_path())
 
         for obj in objects_listing:
+            object_extension = ''
             object_path = str(obj.virtual_url_path())
             
             if self._objImplementsInterface(obj, interfaces.IATFile) or \
@@ -330,25 +330,20 @@ class ZipFileTransportUtility(SimpleItem):
 
                 if "text/html" == obj.Format():
                     file_data = obj.getText()
-                    if object_path[-5:] != ".html" and \
-                                object_path[-4:] != ".htm":
-                        object_path += ".html"
+                    object_extension = ".html"
                         
                 elif "text/x-rst" == obj.Format():
                     file_data = obj.getRawText() 
-                    if object_path[-4:] != ".rst":                   
-                        object_path += ".rst"                    
+                    object_extension = ".rst"                    
 
                 elif "text/structured" == obj.Format():
                     file_data = obj.getRawText() 
-                    if object_path[-4:] != ".stx":                   
-                        object_path += ".stx"
+                    object_extension = ".stx"
                         
                 elif "text/plain" == obj.Format():
                     file_data = obj.getRawText() 
-                    if object_path[-4:] != ".txt":                   
-                        object_path += ".txt"
-                        
+                    object_extension = ".txt"
+
                 else:
                     file_data = obj.getRawText()
 
@@ -364,7 +359,7 @@ class ZipFileTransportUtility(SimpleItem):
                         object_path = object_path.replace(context_path + '/', '')
             
                     if object_path[-5:] != ".html" and object_path[-4:] != ".htm":
-                        object_path += ".html"
+                        object_extension = ".html"
             else:
                 continue
 
@@ -384,6 +379,9 @@ class ZipFileTransportUtility(SimpleItem):
                     filename_path = '/'.join(filename_path)
                 else:
                     filename_path = filename_path[0] 
+
+                # Add the correct file extension
+                filename_path += object_extension
 
                 if 'Windows' in context.REQUEST['HTTP_USER_AGENT']:
                     filename_path = filename_path.decode('utf-8').encode('cp437')

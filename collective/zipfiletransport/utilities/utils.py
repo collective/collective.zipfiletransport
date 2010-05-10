@@ -381,7 +381,8 @@ class ZipFileTransportUtility(SimpleItem):
                     filename_path = filename_path[0] 
 
                 # Add the correct file extension
-                filename_path += object_extension
+                if filename_path[-len(object_extension):] != object_extension:
+                    filename_path += object_extension
 
                 if 'Windows' in context.REQUEST['HTTP_USER_AGENT']:
                     filename_path = filename_path.decode('utf-8').encode('cp437')

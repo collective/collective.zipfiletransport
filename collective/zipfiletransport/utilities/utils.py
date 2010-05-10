@@ -370,22 +370,15 @@ class ZipFileTransportUtility(SimpleItem):
 
             # start point for object path, adding 1 removes the initial '/'
             object_path = self.generateSafeFileName(object_path)
-            catalog = getToolByName(context, 'portal_catalog')
 
             if object_path: 
                 # reconstruct path with filename, restores non-ascii 
                 # characters in filenames
-                i = 0
                 filename_path = []
-                while i < len(object_path.split('/')):
-                    #store each part
-                    filename_path += [
-                            catalog.searchResults(
-                                    path={'query':(obj.virtual_url_path()), }
-                                )[0].Title,
-                            ]
+                for i in range(0, len(object_path.split('/'))):
+                    filename_path.append(obj.Title())
                     obj = obj.aq_inner.aq_parent
-                    i += 1        
+
                 if len(filename_path) > 1:
                     filename_path.reverse()
                     filename_path = '/'.join(filename_path)

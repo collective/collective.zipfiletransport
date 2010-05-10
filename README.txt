@@ -30,7 +30,6 @@ Requires
 How to run the tests for this egg (Unix):
 -----------------------------------------
 
-
 *Plone 3*
 
 Make sure you are using Python-2.4.*

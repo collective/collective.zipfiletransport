@@ -35,6 +35,7 @@ except ImportError:
 from OFS.SimpleItem import SimpleItem
 
 from Products.ATContentTypes import interfaces
+from Products.Archetypes.utils import shasattr
 from Products.CMFCore.utils import getToolByName
 
 from plone.i18n.normalizer.interfaces import IURLNormalizer
@@ -320,16 +321,17 @@ class ZipFileTransportUtility(SimpleItem):
         for obj in objects_listing:
             object_path = str(obj.virtual_url_path())
             
-            if self._objImplementsInterface(obj,interfaces.IATFile) or \
-                        self._objImplementsInterface(obj,interfaces.IATImage):
+            if self._objImplementsInterface(obj, interfaces.IATFile) or \
+                        self._objImplementsInterface(obj, interfaces.IATImage):
                 file_data = str(obj.data)
                 object_path = object_path.replace(context_path + '/', '')
                 
-            elif self._objImplementsInterface(obj,interfaces.IATDocument):
+            elif self._objImplementsInterface(obj, interfaces.IATDocument):
 
                 if "text/html" == obj.Format():
                     file_data = obj.getText()
-                    if object_path[-5:] != ".html" and object_path[-4:] != ".htm":                    
+                    if object_path[-5:] != ".html" and \
+                                object_path[-4:] != ".htm":
                         object_path += ".html"
                         
                 elif "text/x-rst" == obj.Format():
@@ -377,7 +379,11 @@ class ZipFileTransportUtility(SimpleItem):
                 filename_path = []
                 while i < len(object_path.split('/')):
                     #store each part
-                    filename_path += [catalog.searchResults(path={'query':(obj.virtual_url_path()),})[0].Title,]
+                    filename_path += [
+                            catalog.searchResults(
+                                    path={'query':(obj.virtual_url_path()), }
+                                )[0].Title,
+                            ]
                     obj = obj.aq_inner.aq_parent
                     i += 1        
                 if len(filename_path) > 1:
@@ -395,16 +401,18 @@ class ZipFileTransportUtility(SimpleItem):
                 
         
     def _objImplementsInterface(self, obj, interfaceClass):
+        """ Return boolean indicating if obj implements the given interface.
         """
-        Return boolean indicating if obj implements the given interface.
-        """
-        if not hasattr(obj, '__implements__'):
-            return 0
+        if shasattr(interfaceClass, 'providedBy') and \
+                interfaceClass.providedBy(obj):
+            return True
+
+        if not shasattr(obj, '__implements__'):
+            return False
     
         if interfaceClass in self._tupleTreeToList(obj.__implements__):
-            return 1
+            return True
     
-        return 0
 
     def _tupleTreeToList(self, t, lsa=None):
         """Convert an instance, or tree of tuples, into list."""
@@ -416,6 +424,7 @@ class ZipFileTransportUtility(SimpleItem):
         else:
             lsa.append(t)
         return lsa
+
 
     def _appendItemsToList(self, folder, list, state):
         """ """
@@ -434,6 +443,7 @@ class ZipFileTransportUtility(SimpleItem):
                     list.append(obj)
                 
         return list
+
     
     def _convertToUnicode(self, bytestring):
         """ Convert bytestring into unicode object

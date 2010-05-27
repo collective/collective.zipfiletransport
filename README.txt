@@ -34,17 +34,17 @@ How to run the tests for this egg (Unix):
 
 Make sure you are using Python-2.4.*
 
-Check the egg trunk out into a directory::
+Check the egg trunk out into a directory:
 
 svn co https://svn.plone.org/svn/collective/collective.zipfiletransport/trunk collective.zipfiletransport
 
-Download bootstrap.py and run it::
+Download bootstrap.py and run it:
 
 wget http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py
 
 python bootstrap.py -c test-plone-3.3.x.cfg
 
-Run the buildout::
+Run the buildout:
 
 ./bin/buildout -vc test-plone-3.3.x.cfg
 

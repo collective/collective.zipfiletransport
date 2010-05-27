@@ -1,19 +1,33 @@
 =========================================
-ZipFileTransport 2.2.1-final Installation
+ZipFileTransport 2.2.2-final Installation
 =========================================
 
 -------------------------
 Installation Instructions
 -------------------------
 
+Modify Buildout
+===============
+
+Add the following to your buildout.cfg:
+
+[buildout]
+...
+eggs =
+    collective.zipfiletransport
+
+[instance]
+...
+zcml =
+    collective.zipfiletransport
+
+Rerun buildout, and start (restart) Zope.
+
+
 Installation
 ============
 
-This Product can be installed via either an Extension Profile or the QuickInstaller.
-
-Copy this product into the Products directory in your Zope instance. 
-
-Restart your Zope server.
+collective.zipfiletransport can be installed via either an Extension Profile or the QuickInstaller.
   
 To add this Product to an existing site:
   * Click on the site setup link
@@ -25,19 +39,3 @@ To add this Product to a new site:
   * Use the drop down list to Add a new Plone Site
   * Select the ZipFileTransport Extension Profile
   * Click Add Plone Site
-
-
-Configuration
-=============
-
-As of Plone 3.0.5, Plone does not configure a workflow for Image and File types on install.
-
-You will need to configure a workflow for ZipFileTransport to work properly.
-
-To configure a workflow for an object type:
-   * Click on the site setup link
-   * Click on Types
-   * Select Image from the drop down list
-   * Select 'Default Workflow' (or a custom workflow for your site, if one is defined)
-   * Select Apply Changes
-   * Repeat the above steps for File type

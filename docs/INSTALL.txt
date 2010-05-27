@@ -1,5 +1,5 @@
 collective.zipfiletransport Installation
-==========================
+========================================
 
 To install collective.zipfiletransport into the global Python environment (or a workingenv),
 using a traditional Zope 2 instance, you can do this:

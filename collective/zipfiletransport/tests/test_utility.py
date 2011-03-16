@@ -2,11 +2,10 @@ import os
 
 from zope import component
 from collective.zipfiletransport.tests.base import TestCase
-from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
+from collective.zipfiletransport.utilities.interfaces import \
+    IZipFileTransportUtility
 
-class TestChat(TestCase):
-    """ Tests the babble/client/browser/chat.py module
-    """
+class TestZipfiletransportUtility(TestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
@@ -32,7 +31,8 @@ class TestChat(TestCase):
         folder = self.folder
         self.assertEquals(folder.objectIds(), ['test_folder'])
 
-        # XXX: No properties are being set on the imported folder, is the desirable?
+        # XXX: No properties are being set on the imported folder, is
+        # the desirable?
         zip_folder = self.folder.test_folder
         self.assertEquals(zip_folder.getExcludeFromNav(), False)
         self.assertEquals(zip_folder.Subject(), ())
@@ -46,7 +46,8 @@ class TestChat(TestCase):
 
         # Test that the categories were applied
         for oid  in zip_folder_contents:
-            self.assertEquals(zip_folder[oid].Subject(), ('testing', 'zipfileimport'))
+            self.assertEquals(zip_folder[oid].Subject(),
+                              ('testing', 'zipfileimport'))
 
 
         # Import again with new properties but with overwrite=False
@@ -56,18 +57,21 @@ class TestChat(TestCase):
                                 description='test_folder zip file description',
                                 contributors='test_user1',
                                 overwrite=False,
-                                categories=['testing', 'zipfileimport', 'new category'],
+                                categories=['testing', 'zipfileimport',
+                                            'new category'],
                                 excludefromnav=True,
                                 )
 
         # Test that no properties were changed, since we specified:
         # overwrite=False
-        # XXX: No properties are being set on the imported folder, is the desirable?
+        # XXX: No properties are being set on the imported folder, is
+        # the desirable?
         self.assertEquals(zip_folder.getExcludeFromNav(), False)
         self.assertEquals(zip_folder.Subject(), ())
 
         for oid  in zip_folder_contents:
-            self.assertEquals(zip_folder[oid].Subject(), ('testing', 'zipfileimport'))
+            self.assertEquals(zip_folder[oid].Subject(),
+                              ('testing', 'zipfileimport'))
             self.assertEquals(zip_folder[oid].getExcludeFromNav(), False)
 
         # Import again with new properties but with overwrite=True
@@ -77,14 +81,16 @@ class TestChat(TestCase):
                                 description='test_folder zip file description',
                                 contributors='test_user2',
                                 overwrite=True,
-                                categories=['testing', 'zipfileimport', 'new category'],
+                                categories=['testing', 'zipfileimport',
+                                            'new category'],
                                 excludefromnav=True,
                                 )
 
         # Test that no properties were changed, since we specified:
         # overwrite=False
         for oid  in zip_folder_contents:
-            self.assertEquals(zip_folder[oid].Subject(), ('testing', 'zipfileimport', 'new category'))
+            self.assertEquals(zip_folder[oid].Subject(),
+                              ('testing', 'zipfileimport', 'new category'))
             self.assertEquals(zip_folder[oid].getExcludeFromNav(), True)
 
 
@@ -105,6 +111,6 @@ class TestChat(TestCase):
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
-    suite.addTest(makeSuite(TestChat))
+    suite.addTest(makeSuite(TestZipfiletransportUtility))
     return suite
 

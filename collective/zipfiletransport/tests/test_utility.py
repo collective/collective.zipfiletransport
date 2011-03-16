@@ -1,3 +1,5 @@
+import os
+
 from zope import component
 from collective.zipfiletransport.tests.base import TestCase
 from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
@@ -11,34 +13,19 @@ class TestChat(TestCase):
 
     def test_import(self):
         self.zft_util = component.getUtility(
-                            IZipFileTransportUtility, 
+                            IZipFileTransportUtility,
                             name="zipfiletransport")
 
-        file = '/'.join(['..',
-                        '..',
-                        'src',
-                        'collective.zipfiletransport',
-                        'collective',
-                        'zipfiletransport',
-                        'tests',
-                        'test_folder.zip',])
-        try:
-            testfile = open(file)
-        except:
-            file = '/'.join([
-                            'collective',
-                            'zipfiletransport',
-                            'tests',
-                            'test_folder.zip',])
+        file = os.path.join(os.path.dirname(__file__), 'test_folder.zip')
 
         # Test Zip file import
         self.zft_util.importContent(
-                                file=file, 
-                                context=self.folder, 
-                                description='test_folder zip file description', 
-                                contributors='test_user', 
-                                overwrite=False, 
-                                categories=['testing', 'zipfileimport'], 
+                                file=file,
+                                context=self.folder,
+                                description='test_folder zip file description',
+                                contributors='test_user',
+                                overwrite=False,
+                                categories=['testing', 'zipfileimport'],
                                 excludefromnav=False,
                                 )
 
@@ -64,12 +51,12 @@ class TestChat(TestCase):
 
         # Import again with new properties but with overwrite=False
         self.zft_util.importContent(
-                                file=file, 
-                                context=self.folder, 
-                                description='test_folder zip file description', 
-                                contributors='test_user1', 
-                                overwrite=False, 
-                                categories=['testing', 'zipfileimport', 'new category'], 
+                                file=file,
+                                context=self.folder,
+                                description='test_folder zip file description',
+                                contributors='test_user1',
+                                overwrite=False,
+                                categories=['testing', 'zipfileimport', 'new category'],
                                 excludefromnav=True,
                                 )
 
@@ -85,12 +72,12 @@ class TestChat(TestCase):
 
         # Import again with new properties but with overwrite=True
         self.zft_util.importContent(
-                                file=file, 
-                                context=self.folder, 
-                                description='test_folder zip file description', 
-                                contributors='test_user2', 
-                                overwrite=True, 
-                                categories=['testing', 'zipfileimport', 'new category'], 
+                                file=file,
+                                context=self.folder,
+                                description='test_folder zip file description',
+                                contributors='test_user2',
+                                overwrite=True,
+                                categories=['testing', 'zipfileimport', 'new category'],
                                 excludefromnav=True,
                                 )
 
@@ -99,11 +86,11 @@ class TestChat(TestCase):
         for oid  in zip_folder_contents:
             self.assertEquals(zip_folder[oid].Subject(), ('testing', 'zipfileimport', 'new category'))
             self.assertEquals(zip_folder[oid].getExcludeFromNav(), True)
-        
+
 
     def test_export(self):
         self.zft_util = component.getUtility(
-                            IZipFileTransportUtility, 
+                            IZipFileTransportUtility,
                             name="zipfiletransport")
 
         obj_paths = ['/'.join(self.folder.getPhysicalPath())]
@@ -112,8 +99,8 @@ class TestChat(TestCase):
 
         # XXX: Add additional tests...
         # Only works in Plone4
-        # self.assertEquals(fp.errors, None) 
-        
+        # self.assertEquals(fp.errors, None)
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite

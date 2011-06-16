@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2.3
+------
+
+  * Added Brazilian Portuguese translation [agnogueira]
+
 2.2.2
 -----
 

@@ -21,7 +21,12 @@ __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
 from zope.formlib.form import  FormFields, action
-from Products.Five.formlib.formbase import EditForm
+
+try: # >= 4.1 
+    from zope.formlib.form import EditForm
+except ImportError: # < 4.1 
+    from Products.Five.formlib.formbase import EditForm
+
 from zope.component import getUtility
 from zope.interface import implements
 from zope.app.form.browser.textwidgets import FileWidget

@@ -5,6 +5,7 @@ Changelog
 ------
 
   * Added Brazilian Portuguese translation [agnogueira]
+  * Added Plone 4.1.x compatibility [erico_andrei]
 
 2.2.2
 -----

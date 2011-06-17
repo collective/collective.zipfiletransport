@@ -21,16 +21,11 @@ __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
 
 from zope.formlib.form import  FormFields, action
-
-try: # >= 4.1 
-    from zope.formlib.form import EditForm
-except ImportError: # < 4.1 
-    from Products.Five.formlib.formbase import EditForm
-
 from zope.component import getUtility
 from zope.interface import implements
 from zope.app.form.browser.textwidgets import FileWidget
 from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
+from collective.zipfiletransport.browser.common import BaseForm
 from collective.zipfiletransport.browser.interfaces import IImport
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
@@ -86,9 +81,9 @@ class ImportFormAdapter(object):
     overwrite = property(get_overwrite, set_overwrite)
     excludefromnav = property(get_excludefromnav, set_excludefromnav)
 
-class ImportForm(EditForm):
+class ImportForm(BaseForm):
     """ Render the import form  """
-
+    
     implements(IImport)
     form_fields = FormFields(IImport)
     form_fields['filename'].custom_widget = FileWidget
@@ -103,7 +98,7 @@ class ImportForm(EditForm):
         self.zft_util = getUtility(
                             IZipFileTransportUtility, 
                             name="zipfiletransport")
-
+    
     @action(_(u'Import'))
     def action_import(self, action, data):
         file_obj = self.context.REQUEST['form.filename']

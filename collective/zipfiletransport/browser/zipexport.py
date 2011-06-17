@@ -22,15 +22,11 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 
 from zope.formlib.form import FormFields, action
 
-try: # >= 4.1 
-    from zope.formlib.form import EditForm
-except ImportError: # < 4.1 
-    from Products.Five.formlib.formbase import EditForm
-
 from zope.component import getUtility
 from zope.interface import implements
 from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
 from collective.zipfiletransport.browser.interfaces import IExport
+from collective.zipfiletransport.browser.common import BaseForm
 from widgets import ExportWidget
 import os
 import string
@@ -53,7 +49,7 @@ class ExportFormAdapter(object):
     filename = property(get_zipfile_name, set_zipfile_name)
     
 
-class ExportForm(EditForm):
+class ExportForm(BaseForm):
     """ Render the export form  """
 
     implements(IExport)

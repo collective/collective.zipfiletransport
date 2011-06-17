@@ -1,11 +1,15 @@
 <configure xmlns="http://namespaces.zope.org/zope"
             xmlns:five="http://namespaces.zope.org/five"
+            xmlns:zcml="http://namespaces.zope.org/zcml"
             xmlns:i18n="http://namespaces.zope.org/i18n"
             xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
             i18n_domain="ZipFileTransport">
 
   <five:registerPackage package="." />
-
+  
+  <include package="Products.CMFCore" file="permissions.zcml" 
+           zcml:condition="installed plone.app.upgrade"/>
+  
   <include package=".browser" />
   <include package=".utilities" />
 

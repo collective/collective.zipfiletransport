@@ -43,6 +43,9 @@ from plone.i18n.normalizer.interfaces import IURLNormalizer
 from zipfile import ZipFile, ZIP_DEFLATED
 from interfaces import IZipFileTransportUtility
 
+from tempfile import TemporaryFile
+
+
 class ZipFileTransportUtility(SimpleItem):
     """ ZipFileTransport Utility """
 
@@ -266,12 +269,23 @@ class ZipFileTransportUtility(SimpleItem):
     #               that will be included in the zip file.
     # filename - Refers to the fullpath filename of the exported zip file.
 
+
     def exportContent(self, context, obj_paths=None, filename=None):
         """ Export content to a zip file.
         """
         objects_list = self._createObjectList(context, obj_paths)
         zip_path = self._getAllObjectsData(context, objects_list)
         return zip_path
+
+    def exportContentInTempFile(self, context, obj_paths=None, filename=None):
+        """ Export content to a zip file.
+        """
+        objects_list = self._createObjectList(context, obj_paths)
+        tfile = TemporaryFile()
+        self._getAllObjectsData(context, objects_list, tfile)
+        size = tfile.tell()
+        tfile.seek(0)
+        return tfile, size
 
     def _createObjectList(self, context, obj_paths=None, state=None):
         """ Create a list of objects by iteratively descending a folder
@@ -305,16 +319,15 @@ class ZipFileTransportUtility(SimpleItem):
         file_name = unquote(file_name)
         return file_name
 
-    def _getAllObjectsData(self, context, objects_listing):
+    def _getAllObjectsData(self, context, objects_listing, tfile):
         """ Returns the data in all files with a content object to be placed
             in a zipfile
         """
-        import tempfile
         # Use temporary IO object instead of writing to filesystem.
-        fd, path = tempfile.mkstemp('.zipfiletransport')
-        close(fd)
+        #fd, path = tempfile.mkstemp('.zipfiletransport')
+        #close(fd)
 
-        zipFile =  ZipFile(path, 'w', ZIP_DEFLATED)
+        zipFile =  ZipFile(tfile, 'w', ZIP_DEFLATED)
         context_path = str(context.virtual_url_path())
 
         for obj in objects_listing:
@@ -389,7 +402,7 @@ class ZipFileTransportUtility(SimpleItem):
                 zipFile.writestr(filename_path, file_data)
 
         zipFile.close()
-        return path
+        return ''
 
 
     def _objImplementsInterface(self, obj, interfaceClass):

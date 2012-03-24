@@ -22,6 +22,7 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 
 import unicodedata
 from os import close
+import tempfile
 from os.path import split, splitext
 from urllib import unquote
 
@@ -274,7 +275,7 @@ class ZipFileTransportUtility(SimpleItem):
         """ Export content to a zip file.
         """
         objects_list = self._createObjectList(context, obj_paths)
-        zip_path = self._getAllObjectsData(context, objects_list)
+        zip_path = self._getAllObjectsData(context, objects_list, filename, tmp=True)
         return zip_path
 
     def exportContentInTempFile(self, context, obj_paths=None, filename=None):
@@ -319,13 +320,15 @@ class ZipFileTransportUtility(SimpleItem):
         file_name = unquote(file_name)
         return file_name
 
-    def _getAllObjectsData(self, context, objects_listing, tfile):
+    def _getAllObjectsData(self, context, objects_listing, tfile, tmp=False):
         """ Returns the data in all files with a content object to be placed
             in a zipfile
         """
         # Use temporary IO object instead of writing to filesystem.
-        #fd, path = tempfile.mkstemp('.zipfiletransport')
-        #close(fd)
+        if tmp:
+            fd, path = tempfile.mkstemp('.zipfiletransport')
+            tfile = path
+            close(fd)
 
         zipFile =  ZipFile(tfile, 'w', ZIP_DEFLATED)
         context_path = str(context.virtual_url_path())
@@ -402,7 +405,9 @@ class ZipFileTransportUtility(SimpleItem):
                 zipFile.writestr(filename_path, file_data)
 
         zipFile.close()
-        return ''
+        if not tmp:
+            tfile = ''
+        return tfile
 
 
     def _objImplementsInterface(self, obj, interfaceClass):

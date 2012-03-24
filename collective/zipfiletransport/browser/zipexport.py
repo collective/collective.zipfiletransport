@@ -19,6 +19,7 @@
 
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
+import logging
 
 from zope.formlib.form import FormFields, action
 
@@ -71,6 +72,7 @@ class ExportForm(BaseForm):
 
     @action(_(u'Export'))
     def action_export(self, action, data):
+        logger = logging.getLogger('zipfiletransport.export')
         RESPONSE_BLOCK_SIZE = 32768
         #Discover Object Paths in hidden form fields
         obj_paths = None
@@ -120,7 +122,15 @@ class ExportForm(BaseForm):
                 break
         fp.close()
         # temporary measure to see the file object...
-        os.rename(zip_path, zip_path + "_TEMP")
+        #os.rename(zip_path, zip_path + "_TEMP")
+        try:
+            os.unlink(zip_path)
+        except Exception, e:
+            logger.warning(
+                'Canr remove %s: %s' %(
+                    zip_path, e
+                    )
+            )
         return
     
 

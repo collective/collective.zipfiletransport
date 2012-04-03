@@ -25,6 +25,17 @@ from zope.component import getUtility
 from zope.interface import implements
 from Products.CMFPlone.utils import getToolByName
 
+from collective.zipfiletransport.interfaces import (
+    IZipfileNotImportable, IZipfileNotExportable,
+)
 
+class isZipfileImportable(object):
+     def __call__(self):
+        return not IZipfileNotImportable.providedBy(self.context)
+
+
+class isZipfileExportable(object):
+    def __call__(self):
+        return not IZipfileNotExportable.providedBy(self.context)
 
 

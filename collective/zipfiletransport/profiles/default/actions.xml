@@ -7,6 +7,7 @@
    <property name="title" i18n:translate="">Import</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:@@import_form:method</property>
+   <property name="available_expr">object/@@isZipfileImportable</property>
    <property name="icon_expr"></property>
    <property name="permissions">
     <element value="Modify portal content"/>
@@ -21,6 +22,7 @@
    <property name="permissions">
     <element value="Modify portal content"/>
    </property>
+   <property name="available_expr">object/@@isZipfileExportable</property>
    <property name="visible">True</property>
   </object>
  </object>

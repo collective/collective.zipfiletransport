@@ -28,4 +28,9 @@ class IATTopic(Interface):
 class IPortalObject(Interface):
     pass
 
+class IZipfileNotImportable(Interface):
+    """Marker for not importable contents"""
+
+class IZipfileNotExportable(Interface):
+    """Marker for not importable contents"""
 

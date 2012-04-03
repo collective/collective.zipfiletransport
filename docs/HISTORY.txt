@@ -6,7 +6,8 @@ Changelog
 
   * Added Brazilian Portuguese translation [agnogueira]
   * Added Plone 4.1.x compatibility [erico_andrei]
-  * Fixed export feature
+  * Fixed export feature [kiorky]
+  * Added a way (marker interface) to hide import/export buttongs on certain contents [kiorky]
 
 2.2.2
 -----

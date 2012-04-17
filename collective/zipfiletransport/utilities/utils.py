@@ -324,6 +324,9 @@ class ZipFileTransportUtility(SimpleItem):
         """ Returns the data in all files with a content object to be placed
             in a zipfile
         """
+        props = getToolByName(context, 'portal_properties')
+        nameByTitle = props.zipfile_properties.name_by_title
+
         # Use temporary IO object instead of writing to filesystem.
         if tmp:
             fd, path = tempfile.mkstemp('.zipfiletransport')
@@ -383,11 +386,25 @@ class ZipFileTransportUtility(SimpleItem):
             object_path = self.generateSafeFileName(object_path)
 
             if object_path:
-                # reconstruct path with filename, restores non-ascii
-                # characters in filenames
+                # Reconstruct path with filename, use ID unless
+                # name_by_title has been set. Name by ID is the
+                # default behavior so that links to other documents
+                # in documents will be preserved when the same file
+                # is imported back into your Plone site. If you use 
+                # name_by_title, you will be able to save non-ascii 
+                # chars in the filename but you will not be able to 
+                # round trip the ZIP archive and have links in your 
+                # documents continue to work. ID is the preferred 
+                # solution, as it is much work to go through lots of 
+                # documents by hand, find the internal links and 
+                # correct them manually.
                 filename_path = []
                 for i in range(0, len(object_path.split('/'))):
-                    filename_path.append(obj.Title())
+                    if nameByTitle:
+                        # Use title for filename in ZIP export
+                        filename_path.append(obj.Title())
+                    else:
+                        filename_path.append(obj.getId())
                     obj = obj.aq_inner.aq_parent
 
                 if len(filename_path) > 1:

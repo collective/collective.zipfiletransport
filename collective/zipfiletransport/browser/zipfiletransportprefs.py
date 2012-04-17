@@ -23,7 +23,7 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 from zope.interface import Interface, implements 
 from zope.component import adapts,  getUtility
 from zope.formlib import form
-from zope.schema import TextLine
+from zope.schema import TextLine, Bool
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
@@ -54,7 +54,10 @@ class IZipFileTransportPrefsForm(Interface):
                                         'will be instantiated as an object of this type'),
                           required=True)
                           
-
+    name_by_title = Bool(title=_('Name Objects By Title'),
+                         description=_(u'Use an object''s title as filename in ZIP export instead of ID.'),
+                         required=False)
+                                 
 
 class ZipFileTransportControlPanelAdapter(SchemaAdapterBase):
     """ Control Panel adapter """
@@ -91,12 +94,18 @@ class ZipFileTransportControlPanelAdapter(SchemaAdapterBase):
 
     def set_folder_type(self, folder_type):
         self.zf_props.folder_type = folder_type
+
+    def get_name_by_title(self):
+        return self.zf_props.name_by_title
     
+    def set_name_by_title(self, value):
+        self.zf_props.name_by_title = value
+
     image_type = property(get_image_type, set_image_type)
     file_type = property(get_file_type, set_file_type)
     doc_type = property(get_doc_type, set_doc_type)
     folder_type = property(get_folder_type, set_folder_type)
-
+    name_by_title = property(get_name_by_title, set_name_by_title)
     
 class ZipFileTransportPrefsForm(ControlPanelForm):
     """ The view class for the zipfile transport preferences form. """

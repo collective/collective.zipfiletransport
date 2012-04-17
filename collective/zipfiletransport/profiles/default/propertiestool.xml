@@ -6,5 +6,6 @@
     <property name="file_type" type="string">File</property>
     <property name="doc_type" type="string">Document</property>
     <property name="folder_type" type="string">Folder</property>
+    <property name="name_by_title" type="boolean">false</property>
   </object>
 </object>

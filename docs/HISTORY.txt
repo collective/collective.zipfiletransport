@@ -2,8 +2,13 @@ Changelog
 =========
 
 2.2.3
-------
+-----
 
+  * Added preference to choose between IDs or titles for filename on 
+    export and added a control panel setting [blambert]
+  * Set ID to be the default filename so that internal links in 
+    documents will be preserved in the ZIP export file [blambert] 
+  * Added metadata.xml to track property changes in GS [blambert]
   * Added Brazilian Portuguese translation [agnogueira]
   * Added Plone 4.1.x compatibility [erico_andrei]
   * Fixed export feature [kiorky]

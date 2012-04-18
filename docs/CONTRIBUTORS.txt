@@ -1,6 +1,6 @@
 Contributors
 ------------
- - Brent Lambert 
+ - Brent Lambert [blambert] <brent@enpraxis.net> 
  - David Ray 
  - Jon Thomas
  - JC Brand 

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.2.0
+-----
+
+  * Bumped version number so that current version succeeds older test version 3.1 [blambert]
+
 2.2.3
 -----
 

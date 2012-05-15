@@ -36,21 +36,21 @@ Make sure you are using Python-2.4.*
 
 Check the egg trunk out into a directory::
 
-svn co https://svn.plone.org/svn/collective/collective.zipfiletransport/trunk collective.zipfiletransport
+  svn co https://svn.plone.org/svn/collective/collective.zipfiletransport/trunk collective.zipfiletransport
 
 Download bootstrap.py and run it::
 
-wget http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py
+  wget http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py
 
-python bootstrap.py -c test-plone-3.3.x.cfg
+  python bootstrap.py -c test-plone-3.3.x.cfg
 
 Run the buildout::
 
-./bin/buildout -vc test-plone-3.3.x.cfg
+  ./bin/buildout -vc test-plone-3.3.x.cfg
 
 Now run the tests::
 
-./bin/test -s collective.zipfiletransport
+  ./bin/test -s collective.zipfiletransport
 
 
 

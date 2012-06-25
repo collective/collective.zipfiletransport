@@ -1,6 +1,10 @@
 Changelog
 =========
 
+3.2.1
+-----
+  * fixed ZCML deprecations [ajung]
+
 3.2.0
 -----
 

@@ -13,10 +13,9 @@
   <include package=".browser" />
   <include package=".utilities" />
 
-  <five:implements
-      class="Products.CMFCore.PortalObject.PortalObjectBase"
-      interface="collective.zipfiletransport.interfaces.IPortalObject"
-      />
+  <class class="Products.CMFCore.PortalObject.PortalObjectBase">
+      <interface="collective.zipfiletransport.interfaces.IPortalObject" />
+  </class>
 
   <!-- five:traversable has been removed in Zope 2.12
        and has been unnecessary since zope 2.10

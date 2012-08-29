@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-08-06 22:29+0000\n"
+"POT-Creation-Date: 2012-08-02 15:07+0000\n"
 "PO-Revision-Date: 2011-06-16 16:31-0300\n"
 "Last-Translator: Andre Nogueira <andre@simplesconsultoria.com.br>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
@@ -14,33 +14,33 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ZipFileTransport\n"
 
-#: ./browser/interfaces.py:40
+#: ./browser/interfaces.py:39
 msgid "A description which will be given to each file in the ZIP archive."
 msgstr "Uma descrição que será dada a cada arquivo do arquivo ZIP."
+
+#: ./browser/zipexport.py:62
+msgid "All files in the folder will be exported in .zip file format"
+msgstr "Todos os arquivos da pasta serão exportados no arquivo zip"
 
 #. Default: "All files in the folder will be exported in .zip file format."
 #: ./browser/export_widget.pt:10
 msgid "All files in the folder will be exported in .zip file format."
 msgstr "Todos os arquivos da pasta serão exportados no arquivo zip."
 
-#: ./browser/zipexport.py:63
-msgid "All files in the folder will be exported in .zip file format"
-msgstr "Todos os arquivos da pasta serão exportados no arquivo zip"
-
-#: ./browser/interfaces.py:48
+#: ./browser/interfaces.py:54
 msgid "Also known as keywords, tags or labels, these help you categorize your content. Each category should be on a separate line."
 msgstr "Também conhecido como palavras-chave, ajudam a categorizar o seu conteúdo. Cada categoria deve etar em uma linha separada."
 
 #. Default: "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
-#: ./browser/interfaces.py:53
+#: ./browser/interfaces.py:62
 msgid "Check this box to overwrite existing files with the same name. If left unchecked, same named files will not import."
 msgstr "Marque esta caixa para sobrescrever arquivos existentes com o mesmo nome. Se a opção não for marcada, arquivos com o mesmo nome não serão importadosr."
 
-#: ./browser/zipfiletransportprefs.py:108
+#: ./browser/zipfiletransportprefs.py:117
 msgid "Configure object type settings for imported objects.  These values should not be adjusted unless your site has overwritten the default object types."
 msgstr "Configure o tipo de item para os objetos importados. Estes valores não devem ser ajustados a menos que seu site tenha substituído os tipos de objeto padrão."
 
-#: ./browser/interfaces.py:43
+#: ./browser/interfaces.py:45
 msgid "Contributors"
 msgstr "Colaboradores"
 
@@ -48,15 +48,16 @@ msgstr "Colaboradores"
 msgid "Document Type"
 msgstr "Tipo de Documento"
 
-#: ./browser/interfaces.py:57
+#: ./browser/interfaces.py:70
 msgid "Exclude from left navigation"
 msgstr "Excluir da navegação"
 
-#: ./browser/zipexport.py:72
+#: ./browser/zipexport.py:73
+#: ./profiles/default/actions.xml
 msgid "Export"
 msgstr "Exportar"
 
-#: ./browser/zipexport.py:62
+#: ./browser/zipexport.py:61
 msgid "Export Content"
 msgstr "Exportar conteúdo"
 
@@ -68,7 +69,7 @@ msgstr "Arquivo"
 msgid "Folder Type"
 msgstr "Pasta"
 
-#: ./browser/interfaces.py:58
+#: ./browser/interfaces.py:71
 msgid "If selected, imported item(s) will not appear in the navigation tree."
 msgstr "Se selecionado, itens importados não aparecerão na navegação."
 
@@ -77,29 +78,34 @@ msgid "Image Type"
 msgstr "Imagem"
 
 #. Default: "Import"
-#: ./browser/zipimport.py:101
+#: ./browser/zipimport.py:102
+#: ./profiles/default/actions.xml
 msgid "Import"
 msgstr "Importar"
 
 #. Default: "Import Content"
-#: ./browser/zipimport.py:93
+#: ./browser/zipimport.py:91
 msgid "Import Content"
 msgstr "Importar conteúdo"
 
-#: ./browser/interfaces.py:39
+#: ./browser/interfaces.py:38
 msgid "Import Description"
 msgstr "Importar descrição"
 
-#: ./browser/interfaces.py:47
+#: ./browser/interfaces.py:53
 msgid "Keyword Categories"
 msgstr "Tags"
 
+#: ./browser/zipfiletransportprefs.py:57
+msgid "Name Objects By Title"
+msgstr ""
+
 #. Default: "Overwrite"
-#: ./browser/interfaces.py:52
+#: ./browser/interfaces.py:61
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: ./browser/interfaces.py:64
+#: ./browser/interfaces.py:79
 msgid "Select the ZIP archive file to be imported."
 msgstr "Selecione o Arquivo ZIP quer será importado."
 
@@ -124,37 +130,41 @@ msgstr "Definir o tipo de pasta aqui. Pastas importadas através do ZipFileTrans
 msgid "The following files will be exported in .zip file format:"
 msgstr "Os seguintes arquivos serão exportados  no arquivo .zip:"
 
-#: ./browser/interfaces.py:33
+#: ./browser/interfaces.py:31
 msgid "The name of the file downloaded to your local machine."
 msgstr "O nome do arquivo que será baixado para o seu computador."
 
-#: ./browser/interfaces.py:44
+#: ./browser/interfaces.py:46
 msgid "The names of people that have contributed to imported item(s).  Each contributor should be on a separate line."
 msgstr "Os nomes das pessoas que colaboraram com os itens importados. Inform um nome por linha."
 
-#: ./browser/zipimport.py:94
+#: ./browser/zipimport.py:92
 msgid "This form will import content from files contained in a .zip file, and will create new objects"
 msgstr "Este formulário irá importar o conteúdo de arquivos contidos em um arquivo .zip, e criar novos objetos"
 
+#: ./browser/zipfiletransportprefs.py:58
+msgid "Use an objects title as filename in ZIP export instead of ID."
+msgstr ""
+
 #. Default: "Zip File"
-#: ./browser/interfaces.py:63
+#: ./browser/interfaces.py:78
 msgid "Zip File"
 msgstr "Arquivo Zip"
 
-#: ./browser/interfaces.py:32
+#: ./browser/interfaces.py:30
 msgid "Zip File Export"
 msgstr "Exportar arquivo Zip"
-
-#: ./browser/zipfiletransportprefs.py:110
-msgid "ZipFileTransport Settings"
-msgstr "Configurações do ZipFileTransport"
-
-#: ./browser/zipfiletransportprefs.py:107
-msgid "ZipFileTransport Settings Form"
-msgstr "Formulario de configurações do ZipFileTransport"
 
 #. Default: "ZipFileTransport"
 #: ./profiles/default/actionicons.xml
 msgid "ZipFileTransport"
 msgstr "ZipFileTransport"
+
+#: ./browser/zipfiletransportprefs.py:119
+msgid "ZipFileTransport Settings"
+msgstr "Configurações do ZipFileTransport"
+
+#: ./browser/zipfiletransportprefs.py:116
+msgid "ZipFileTransport Settings Form"
+msgstr "Formulario de configurações do ZipFileTransport"
 

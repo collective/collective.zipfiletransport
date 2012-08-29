@@ -12,19 +12,11 @@
   
   <include package=".browser" />
   <include package=".utilities" />
-
+<!--
   <class class="Products.CMFCore.PortalObject.PortalObjectBase">
       <interface="collective.zipfiletransport.interfaces.IPortalObject" />
   </class>
-
-  <!-- five:traversable has been removed in Zope 2.12
-       and has been unnecessary since zope 2.10
-       Using zcml:condition="not-have plone4" doesn't fix this...
-
-    <five:traversable class="OFS.Application.Application" /> 
-    <five:traversable class="Products.CMFCore.PortalObject.PortalObjectBase" />
-  -->
-
+-->
   <i18n:registerTranslations  directory="locales" />
 
   <genericsetup:registerProfile

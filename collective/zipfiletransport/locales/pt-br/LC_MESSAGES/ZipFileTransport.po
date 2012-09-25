@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-08-02 15:07+0000\n"
-"PO-Revision-Date: 2011-06-16 16:31-0300\n"
-"Last-Translator: Andre Nogueira <andre@simplesconsultoria.com.br>\n"
+"POT-Creation-Date: 2012-09-25 00:08+0000\n"
+"PO-Revision-Date: 2012-08-06 11:24-0300\n"
+"Last-Translator: Gustavo Schwarz <gustavo.sne@gmail.com>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -97,8 +97,9 @@ msgid "Keyword Categories"
 msgstr "Tags"
 
 #: ./browser/zipfiletransportprefs.py:57
+#, fuzzy
 msgid "Name Objects By Title"
-msgstr ""
+msgstr "Nome dos Objetos Por Título"
 
 #. Default: "Overwrite"
 #: ./browser/interfaces.py:61
@@ -144,7 +145,7 @@ msgstr "Este formulário irá importar o conteúdo de arquivos contidos em um ar
 
 #: ./browser/zipfiletransportprefs.py:58
 msgid "Use an objects title as filename in ZIP export instead of ID."
-msgstr ""
+msgstr "Ao exportar o ZIP utilize um título como nome do arquivo ao invés de um ID."
 
 #. Default: "Zip File"
 #: ./browser/interfaces.py:78

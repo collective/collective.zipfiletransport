@@ -3,7 +3,11 @@ Changelog
 
 3.2.1
 -----
+
   * fixed ZCML deprecations [ajung]
+  * Updated pot file [blambert555]
+  * Updated Spanish translations [blambert555]
+  * Updated Brazilian Porteguese translations [blambert555]
 
 3.2.0
 -----

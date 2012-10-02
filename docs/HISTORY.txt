@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.2.2
+-----
+
+  * fixed import deprecation warning [ajung]
+
 3.2.1
 -----
 

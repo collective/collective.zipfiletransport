@@ -41,7 +41,7 @@ except ImportError:
     CustomizationPolicy = None
 
 from AccessControl import allow_module
-from Globals import package_home
+from App.Common import package_home
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize

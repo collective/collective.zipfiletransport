@@ -1,6 +1,12 @@
 Changelog
 =========
 
+3.2.3 (unreleased)
+------------------
+
+  * Removed KSS Support [pbauer]
+
+
 3.2.2
 -----
 
@@ -45,12 +51,6 @@ Changelog
 -----
 
   * Minor documentation changes
-3.2.3 (unreleased)
-------------------
-
-- Nothing changed yet.
-
-
   * Repackaging; bad egg (missing docs folder)
 
 2.2.0

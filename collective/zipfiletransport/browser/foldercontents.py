@@ -12,7 +12,7 @@ from Products.Five import BrowserView
 
 from plone.memoize import instance
 from plone.app.content.browser.interfaces import IFolderContentsView
-from plone.app.content.browser.tableview import Table, TableKSSView
+from plone.app.content.browser.tableview import Table
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
@@ -232,7 +232,4 @@ class FolderContentsTable(object):
         else:
             button['cssclass'] = 'context'
         return button
-
-class FolderContentsKSSView(TableKSSView):
-    table = FolderContentsTable
 

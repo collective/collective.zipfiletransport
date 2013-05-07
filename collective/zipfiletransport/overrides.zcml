@@ -12,11 +12,4 @@
     permission="cmf.ListFolderContents" 
     />
 
-<browser:page
-     for="*"
-     class=".browser.foldercontents.FolderContentsKSSView"
-     attribute="update_table"
-     name="foldercontents_update_table"
-     permission="cmf.ListFolderContents" />
-
 </configure>

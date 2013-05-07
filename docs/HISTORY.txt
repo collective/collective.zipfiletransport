@@ -45,6 +45,12 @@ Changelog
 -----
 
   * Minor documentation changes
+3.2.3 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
   * Repackaging; bad egg (missing docs folder)
 
 2.2.0

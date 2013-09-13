@@ -1,20 +1,21 @@
+# -*- coding: utf-8 -*-
 ##################################################################################
-#    Copyright (c) 2004-2009 Utah State University, All rights reserved. 
-#    Portions copyright 2009 Massachusetts Institute of Technology, All rights reserved.
-#                                                                                 
-#    This program is free software; you can redistribute it and/or modify         
-#    it under the terms of the GNU General Public License as published by         
-#    the Free Software Foundation, version 2.                                      
-#                                                                                 
-#    This program is distributed in the hope that it will be useful,              
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of               
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                
-#    GNU General Public License for more details.                                 
-#                                                                                 
-#    You should have received a copy of the GNU General Public License            
-#    along with this program; if not, write to the Free Software                  
-#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA    
-#                                                                                 
+#    Copyright (c) 2004-2009 Utah State University, All rights reserved.
+#    Portions copyright 2009 Massachusetts Institut of Technology, All rights reserved.
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 2.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
 ##################################################################################
 
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
@@ -48,7 +49,7 @@ class ExportFormAdapter(object):
         pass
 
     filename = property(get_zipfile_name, set_zipfile_name)
-    
+
 
 class ExportForm(BaseForm):
     """ Render the export form  """
@@ -66,7 +67,7 @@ class ExportForm(BaseForm):
         self.context = context
         self.request = request
         self.zft_util = getUtility(
-                            IZipFileTransportUtility, 
+                            IZipFileTransportUtility,
                             name="zipfiletransport")
 
 
@@ -99,14 +100,14 @@ class ExportForm(BaseForm):
 
         zip_path = self.zft_util.exportContent(
                                 context=self.context,
-                                obj_paths=obj_paths, 
+                                obj_paths=obj_paths,
                                 filename=filename)
 
         self.context.REQUEST.RESPONSE.setHeader(
-                                    'content-type', 
+                                    'content-type',
                                     'application/zip')
         self.context.REQUEST.RESPONSE.setHeader(
-                                    'content-length', 
+                                    'content-length',
                                     str(os.stat(zip_path)[6]))
         self.context.REQUEST.RESPONSE.setHeader(
                                     'Content-Disposition',
@@ -127,11 +128,8 @@ class ExportForm(BaseForm):
             os.unlink(zip_path)
         except Exception, e:
             logger.warning(
-                'Canr remove %s: %s' %(
+                'Cannot remove %s: %s' %(
                     zip_path, e
                     )
             )
         return
-    
-
-

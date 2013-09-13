@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from zope.component import getMultiAdapter
 from zope.interface import implements
 from zope.i18n import translate
@@ -23,7 +24,7 @@ class FolderContentsView(BrowserView):
     """
     """
     implements(IFolderContentsView)
-    
+
     def contents_table(self):
         table = FolderContentsTable(aq_inner(self.context), self.request)
         return table.render()
@@ -56,11 +57,11 @@ class FolderContentsView(BrowserView):
         # Abort if we are at the root of the portal
         if IPloneSiteRoot.providedBy(context):
             return None
-        
+
 
         # Get the parent. If we can't get it (unauthorized), use the portal
         parent = aq_parent(obj)
-        
+
         # # We may get an unauthorized exception if we're not allowed to access#
         # the parent. In this case, return None
         try:
@@ -72,16 +73,16 @@ class FolderContentsView(BrowserView):
 
             if not checkPermission('List folder contents', parent):
                 return None
-    
+
             return parent.absolute_url()
 
         except Unauthorized:
-            return None        
+            return None
 
 class FolderContentsTable(object):
-    """   
+    """
     The foldercontents table renders the table and its actions.
-    """                
+    """
 
     def __init__(self, context, request, contentFilter={}):
         self.context = context
@@ -109,7 +110,7 @@ class FolderContentsTable(object):
         portal_properties = getToolByName(context, 'portal_properties')
         portal_types = getToolByName(context, 'portal_types')
         site_properties = portal_properties.site_properties
-        
+
         use_view_action = site_properties.getProperty('typesUseViewActionInListings', ())
         browser_default = context.browserDefault()
 
@@ -128,7 +129,7 @@ class FolderContentsTable(object):
             url = obj.getURL()
             path = obj.getPath or "/".join(obj.getPhysicalPath())
             icon = plone_view.getIcon(obj);
-            
+
             type_class = 'contenttype-' + plone_utils.normalizeString(
                 obj.portal_type)
 
@@ -148,13 +149,13 @@ class FolderContentsTable(object):
             if obj_type in use_view_action:
                 view_url = url + '/view'
             elif obj.is_folderish:
-                view_url = url + "/folder_contents"              
+                view_url = url + "/folder_contents"
             else:
                 view_url = url
 
             is_browser_default = len(browser_default[1]) == 1 and (
                 obj.id == browser_default[1][0])
-                                 
+
             results.append(dict(
                 url = url,
                 url_href_title = url_href_title,
@@ -189,7 +190,7 @@ class FolderContentsTable(object):
     @property
     def show_sort_column(self):
         return self.orderable and self.editable
-        
+
     @property
     def editable(self):
         """
@@ -203,7 +204,7 @@ class FolderContentsTable(object):
         buttons = []
         context = aq_inner(self.context)
         portal_actions = getToolByName(context, 'portal_actions')
-        button_actions = portal_actions.listActionInfos(object=context, categories=('folder_buttons', ))        
+        button_actions = portal_actions.listActionInfos(object=context, categories=('folder_buttons', ))
 
         # Do not show buttons if there is no data, unless there is data to be
         # pasted
@@ -211,7 +212,7 @@ class FolderContentsTable(object):
             for button in button_actions:
                 # Add Import button to available actions in empty folders
                 if button['id'] == 'import':
-                    buttons.append(self.setbuttonclass(button))            
+                    buttons.append(self.setbuttonclass(button))
             if self.context.cb_dataValid():
                 for button in button_actions:
                     if button['id'] == 'paste':

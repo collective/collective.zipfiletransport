@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##################################################################################
 #    Copyright (c) 2004-2009 Utah State University, All rights reserved.
 #    Portions copyright 2009 Massachusetts Institute of Technology, All rights reserved.
@@ -390,13 +391,13 @@ class ZipFileTransportUtility(SimpleItem):
                 # name_by_title has been set. Name by ID is the
                 # default behavior so that links to other documents
                 # in documents will be preserved when the same file
-                # is imported back into your Plone site. If you use 
-                # name_by_title, you will be able to save non-ascii 
-                # chars in the filename but you will not be able to 
-                # round trip the ZIP archive and have links in your 
-                # documents continue to work. ID is the preferred 
-                # solution, as it is much work to go through lots of 
-                # documents by hand, find the internal links and 
+                # is imported back into your Plone site. If you use
+                # name_by_title, you will be able to save non-ascii
+                # chars in the filename but you will not be able to
+                # round trip the ZIP archive and have links in your
+                # documents continue to work. ID is the preferred
+                # solution, as it is much work to go through lots of
+                # documents by hand, find the internal links and
                 # correct them manually.
                 filename_path = []
                 for i in range(0, len(object_path.split('/'))):
@@ -511,28 +512,27 @@ class ZipFileTransportUtility(SimpleItem):
          return fileinfo
 
     def getZipFile(self, zfile, filename):
-         """ Gets a file from the Zip archive.
-         """
-         mt = self.mimetypes_registry
-         f = ZipFile(zfile)
-         finfo = f.getinfo(filename)
-         fn = split(finfo.filename)[1] # Get the file name
-         path = fn.replace('\\', '/')
-         fp = path.split('/') # Split the file path into a list
+	""" Gets a file from the Zip archive.
+        """
+        mt = self.mimetypes_registry
+        f = ZipFile(zfile)
+        finfo = f.getinfo(filename)
+        fn = split(finfo.filename)[1] # Get the file name
+        path = fn.replace('\\', '/')
+        fp = path.split('/') # Split the file path into a list
 
-         if '' == fn:
-             return 'dir', fn, fp, None, None, 0, None
-         ftype = mt.lookupExtension(finfo.filename)
-         if not ftype:
-             major = 'application'
-             mimetype = 'application/octet-stream'
-         else:
-             major =  ftype.major()
-             mimetype = ftype.normalized()
-         fdata = f.read(filename)
-         return 'file', fn, fp, major, mimetype, finfo.file_size, fdata
+        if '' == fn:
+            return 'dir', fn, fp, None, None, 0, None
+        ftype = mt.lookupExtension(finfo.filename)
+        if not ftype:
+            major = 'application'
+            mimetype = 'application/octet-stream'
+        else:
+            major =  ftype.major()
+            mimetype = ftype.normalized()
+        fdata = f.read(filename)
+        return 'file', fn, fp, major, mimetype, finfo.file_size, fdata
 
 
     def get_zipfile_name(self):
         return 'Test.zip'
-

@@ -1,20 +1,21 @@
+# -*- coding: utf-8 -*-
 ##################################################################################
-#    Copyright (c) 2004-2009 Utah State University, All rights reserved. 
+#    Copyright (c) 2004-2009 Utah State University, All rights reserved.
 #    Portions copyright 2009 Massachusetts Institute of Technology, All rights reserved.
-#                                                                                 
-#    This program is free software; you can redistribute it and/or modify         
-#    it under the terms of the GNU General Public License as published by         
-#    the Free Software Foundation, version 2.                                      
-#                                                                                 
-#    This program is distributed in the hope that it will be useful,              
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of               
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                
-#    GNU General Public License for more details.                                 
-#                                                                                 
-#    You should have received a copy of the GNU General Public License            
-#    along with this program; if not, write to the Free Software                  
-#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA    
-#                                                                                 
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 2.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
 ##################################################################################
 
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
@@ -64,7 +65,7 @@ class ImportFormAdapter(object):
 
     def get_categories(self):
         pass
-    
+
     def set_categories(self):
         pass
 
@@ -83,7 +84,7 @@ class ImportFormAdapter(object):
 
 class ImportForm(BaseForm):
     """ Render the import form  """
-    
+
     implements(IImport)
     form_fields = FormFields(IImport)
     form_fields['filename'].custom_widget = FileWidget
@@ -96,9 +97,9 @@ class ImportForm(BaseForm):
         self.context = context
         self.request = request
         self.zft_util = getUtility(
-                            IZipFileTransportUtility, 
+                            IZipFileTransportUtility,
                             name="zipfiletransport")
-    
+
     @action(_(u'Import'))
     def action_import(self, action, data):
         file_obj = self.context.REQUEST['form.filename']
@@ -109,14 +110,14 @@ class ImportForm(BaseForm):
         categories = self.context.REQUEST['form.categories']
 
         self.zft_util.importContent(
-                                file=file_obj, 
-                                context=self.context, 
-                                description=description, 
-                                contributors=contributors, 
-                                overwrite=overwrite, 
-                                categories=categories, 
+                                file=file_obj,
+                                context=self.context,
+                                description=description,
+                                contributors=contributors,
+                                overwrite=overwrite,
+                                categories=categories,
                                 excludefromnav=excludefromnav,
                                 )
-        
+
         self.request.response.redirect('./folder_contents')
 

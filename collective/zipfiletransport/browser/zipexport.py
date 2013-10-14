@@ -31,7 +31,6 @@ from collective.zipfiletransport.browser.interfaces import IExport
 from collective.zipfiletransport.browser.common import BaseForm
 from widgets import ExportWidget
 import os
-import string
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
 class ExportFormAdapter(object):
@@ -71,11 +70,12 @@ class ExportForm(BaseForm):
                             name="zipfiletransport")
 
 
+
     @action(_(u'Export'))
     def action_export(self, action, data):
         logger = logging.getLogger('zipfiletransport.export')
         RESPONSE_BLOCK_SIZE = 32768
-        #Discover Object Paths in hidden form fields
+        logger.info("Discover Object Paths in hidden form fields")
         obj_paths = None
         try:
             self.context.REQUEST['form.obj_paths']
@@ -86,9 +86,10 @@ class ExportForm(BaseForm):
                 obj_paths += [x]
         except:
             pass
+
         filename = self.context.REQUEST['form.filename']
 
-        if string.find(filename,'.zip') == -1:
+        if filename.find('.zip') == -1:
             filename += ".zip"
 
         if self.context.portal_membership.isAnonymousUser() != 0:
@@ -127,9 +128,5 @@ class ExportForm(BaseForm):
         try:
             os.unlink(zip_path)
         except Exception, e:
-            logger.warning(
-                'Cannot remove %s: %s' %(
-                    zip_path, e
-                    )
-            )
+            logger.warning('Cannot remove %s: %s' %(zip_path, e))
         return

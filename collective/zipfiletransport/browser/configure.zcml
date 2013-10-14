@@ -11,12 +11,14 @@
       permission="zope.Public"
       class=".isZipfileExportable"
     />
+
   <browser:view
       for="*"
       name="isZipfileImportable"
       permission="zope.Public"
       class=".isZipfileImportable"
     />
+
   <browser:page
       name="export_form"
       for="*"
@@ -39,14 +41,18 @@
     />
 
   <adapter factory=".zipexport.ExportFormAdapter"
-      for="Products.ATContentTypes.content.folder.ATFolder"/>
+           for="Products.ATContentTypes.content.folder.ATFolder"/>
   <adapter factory=".zipexport.ExportFormAdapter"
-      for="Products.CMFPlone.Portal.PloneSite"/>
+           for="Products.CMFPlone.Portal.PloneSite"/>
+  <adapter factory=".zipexport.ExportFormAdapter"
+           for="plone.dexterity.interfaces.IDexterityContainer"/>
 
   <adapter factory=".zipimport.ImportFormAdapter"
-      for="Products.ATContentTypes.content.folder.ATFolder"/>
+           for="Products.ATContentTypes.content.folder.ATFolder"/>
   <adapter factory=".zipimport.ImportFormAdapter"
-      for="Products.CMFPlone.Portal.PloneSite"/>
+           for="Products.CMFPlone.Portal.PloneSite"/>
+  <adapter factory=".zipimport.ImportFormAdapter"
+           for="plone.dexterity.interfaces.IDexterityContainer"/>
 
   <adapter factory=".zipfiletransportprefs.ZipFileTransportControlPanelAdapter" />
 
@@ -56,14 +62,6 @@
       class=".zipfiletransportprefs.ZipFileTransportPrefsForm"
       permission="cmf.ManagePortal"
     />
-
-  <!-- five:traversable has been removed in Zope 2.12
-    and has been unnecessary since zope 2.10.
-    Using zcml:condition="not-have plone4" doesn't fix this...
-
-    <five:traversable class="OFS.Application.Application" />
-      <five:traversable class="Products.CMFCore.PortalObject.PortalObjectBase" />
-      -->
 
 </configure>
 

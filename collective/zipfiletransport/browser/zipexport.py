@@ -70,7 +70,6 @@ class ExportForm(BaseForm):
                             name="zipfiletransport")
 
 
-
     @action(_(u'Export'))
     def action_export(self, action, data):
         logger = logging.getLogger('zipfiletransport.export')

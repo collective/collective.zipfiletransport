@@ -6,17 +6,17 @@
             i18n_domain="ZipFileTransport">
 
   <five:registerPackage package="." />
-  
-  <include package="Products.CMFCore" file="permissions.zcml" 
+
+  <include package="Products.CMFCore" file="permissions.zcml"
            zcml:condition="installed plone.app.upgrade"/>
-  
+
   <include package=".browser" />
   <include package=".utilities" />
-<!--
+
   <class class="Products.CMFCore.PortalObject.PortalObjectBase">
-      <interface="collective.zipfiletransport.interfaces.IPortalObject" />
+      <implements interface="collective.zipfiletransport.interfaces.IPortalObject" />
   </class>
--->
+
   <i18n:registerTranslations  directory="locales" />
 
   <genericsetup:registerProfile

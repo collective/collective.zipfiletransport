@@ -92,8 +92,10 @@ class ExportForm(EditForm):
         if filename.find('.zip') == -1:
             filename += ".zip"
 
-        if self.context.portal_membership.isAnonymousUser() != 0:
-            return
+        ## Why ? 
+        #if self.context.portal_membership.isAnonymousUser() != 0:
+        #    return
+        ## XX should use a permission
 
         zipfilename = self.zft_util.generateSafeFileName(filename)
         #Detect OS

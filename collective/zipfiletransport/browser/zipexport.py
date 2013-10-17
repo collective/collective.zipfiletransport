@@ -23,14 +23,15 @@ __version__   = '$ Revision 0.0 $'[11:-2]
 import logging
 
 from zope.formlib.form import FormFields, action
+from plone.app.form.base import EditForm
 
 from zope.component import getUtility
 from zope.interface import implements
-from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
-from collective.zipfiletransport.browser.interfaces import IExport
-from collective.zipfiletransport.browser.common import BaseForm
 from widgets import ExportWidget
 import os
+
+from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUtility
+from collective.zipfiletransport.browser.interfaces import IExport
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
 class ExportFormAdapter(object):
@@ -50,7 +51,7 @@ class ExportFormAdapter(object):
     filename = property(get_zipfile_name, set_zipfile_name)
 
 
-class ExportForm(BaseForm):
+class ExportForm(EditForm):
     """ Render the export form  """
 
     implements(IExport)

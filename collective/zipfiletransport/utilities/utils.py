@@ -45,7 +45,13 @@ from plone.i18n.normalizer.interfaces import IURLNormalizer
 from zipfile import ZipFile, ZIP_DEFLATED
 from interfaces import IZipFileTransportUtility
 
+
 from tempfile import TemporaryFile
+try:
+    from plone.namedfile.file import NamedBlobImage
+except ImportError:
+    NamedBlobImage = None
+
 
 
 class ZipFileTransportUtility(SimpleItem):
@@ -222,7 +228,17 @@ class ZipFileTransportUtility(SimpleItem):
             obj = getattr(parent, filename)
 
         if newObjType == image_type:
-            obj.setImage(fdata)
+            try:
+                obj.setImage(fdata)
+            except AttributeError:
+                # plone.app.contenttypes
+                if not isinstance(filename, unicode):
+                    try:
+                        filename = filename.decode('utf-8', 'ignore')
+                    except:
+                        filename = 'image'
+                if NamedBlobImage:
+                    obj.image = NamedBlobImage(fdata, filename=filename)
         elif newObjType == doc_type:
             obj.setText(fdata)
         elif newObjType == file_type:
@@ -477,11 +493,13 @@ class ZipFileTransportUtility(SimpleItem):
         """ Convert bytestring into unicode object
         """
         # *nix encoding
-        try:
-            unicode_text = unicode(bytestring, 'utf-8')
-        # WinZip encoding
-        except UnicodeDecodeError:
-            unicode_text = unicode(bytestring, 'cp437')
+        unicode_text = bytestring
+        if not isinstance(bytestring, unicode):
+            try:
+                unicode_text = unicode(bytestring, 'utf-8')
+            # WinZip encoding
+            except UnicodeDecodeError:
+                unicode_text = unicode(bytestring, 'cp437')
         return unicode_text
 
     #

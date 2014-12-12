@@ -1,6 +1,12 @@
 Changelog
 =========
 
+3.2.4
+-----
+
+ * support for plone.app.contenttypes
+   [kiorky]
+
 3.2.3
 -----
 

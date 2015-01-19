@@ -6,6 +6,9 @@ Changelog
 
  * support for plone.app.contenttypes
    [kiorky]
+ * fix multiple categories on recent plone
+   [kiorky]
+
 
 3.2.3
 -----

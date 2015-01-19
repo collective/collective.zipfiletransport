@@ -110,6 +110,8 @@ class ImportForm(EditForm):
         excludefromnav = self.context.REQUEST.has_key('form.excludefromnav')
         categories = self.context.REQUEST['form.categories']
 
+        if categories and isinstance(categories, basestring):
+            categories = [a.strip() for a in categories.splitlines()]
         self.zft_util.importContent(
                                 file=file_obj,
                                 context=self.context,

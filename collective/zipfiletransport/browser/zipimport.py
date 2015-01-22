@@ -109,7 +109,8 @@ class ImportForm(EditForm):
         overwrite = self.context.REQUEST.has_key('form.overwrite')
         excludefromnav = self.context.REQUEST.has_key('form.excludefromnav')
         categories = self.context.REQUEST['form.categories']
-
+        if contributors and isinstance(contributors, basestring):
+            contributors = [a.strip() for a in contributors.splitlines()]
         if categories and isinstance(categories, basestring):
             categories = [a.strip() for a in categories.splitlines()]
         self.zft_util.importContent(

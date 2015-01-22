@@ -6,7 +6,7 @@ Changelog
 
  * support for plone.app.contenttypes
    [kiorky]
- * fix multiple categories on recent plone
+ * fix multiple categories & contributors on recent plone
    [kiorky]
 
 

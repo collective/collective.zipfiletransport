@@ -52,6 +52,12 @@ try:
 except ImportError:
     NamedBlobImage = None
 
+try:
+    from plone.app.contenttypes.interfaces import IImage
+    from plone.app.contenttypes.interfaces import IFile
+    HAS_PAC = True
+except:
+    HAS_PAC = False
 
 
 class ZipFileTransportUtility(SimpleItem):
@@ -356,8 +362,18 @@ class ZipFileTransportUtility(SimpleItem):
         for obj in objects_listing:
             object_extension = ''
             object_path = str(obj.virtual_url_path())
-
-            if self._objImplementsInterface(obj, interfaces.IATFile) or \
+            file_data = None
+            if HAS_PAC:
+                if IImage.providedBy(obj):
+                    file_data = str(obj.image.data)
+                    object_path = object_path.replace(context_path + '/', '')
+                elif IFile.providedBy(obj):
+                    file_data = str(obj.file.data)
+                    object_path = object_path.replace(context_path + '/', '')
+            if file_data is not None and object_path is not None:
+                # early escape coming from plone.app.contenttypes
+                pass
+            elif self._objImplementsInterface(obj, interfaces.IATFile) or \
                         self._objImplementsInterface(obj, interfaces.IATImage):
                 file_data = str(obj.data)
                 object_path = object_path.replace(context_path + '/', '')

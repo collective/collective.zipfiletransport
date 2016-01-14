@@ -234,21 +234,34 @@ class ZipFileTransportUtility(SimpleItem):
             obj = getattr(parent, filename)
 
         if newObjType == image_type:
+            if not isinstance(filename, unicode):
+                try:
+                    filename = filename.decode('utf-8', 'ignore')
+                except:
+                    filename = 'image'
             try:
                 obj.setImage(fdata)
+                try:
+                    obj.setFilename(filename)
+                except AttributeError:
+                    pass
             except AttributeError:
                 # plone.app.contenttypes
-                if not isinstance(filename, unicode):
-                    try:
-                        filename = filename.decode('utf-8', 'ignore')
-                    except:
-                        filename = 'image'
                 if NamedBlobImage:
                     obj.image = NamedBlobImage(fdata, filename=filename)
         elif newObjType == doc_type:
             obj.setText(fdata)
         elif newObjType == file_type:
-            obj.setFile(fdata)
+            try:
+                obj.setFile(fdata)
+                try:
+                    obj.setFilename(filename)
+                except AttributeError:
+                    pass
+            except AttributeError:
+                # plone.app.contenttypes
+                if NamedBlobImage:
+                    obj.file = NamedBlobImage(fdata, filename=filename)
 
         factory = getToolByName(parent, 'portal_factory')
         catalog = getToolByName(parent, 'portal_catalog')

@@ -28,4 +28,12 @@
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
 
+
+  <genericsetup:upgradeStep
+      title="Upgrade step for collective.zipfiletransport to 101"
+      source="100"
+      destination="101"
+      handler=".upgrades.upgrade_100_to_101"
+      profile="collective.zipfiletransport:default"/>
+
 </configure>

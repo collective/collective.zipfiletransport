@@ -18,8 +18,8 @@
 #
 ##################################################################################
 
-__author__  = '''Brent Lambert, David Ray, Jon Thomas'''
-__version__   = '$ Revision 0.0 $'[11:-2]
+__author__ = '''Brent Lambert, David Ray, Jon Thomas'''
+__version__ = '$ Revision 0.0 $'[11:-2]
 
 import unicodedata
 from os import close
@@ -56,8 +56,10 @@ try:
     from plone.app.contenttypes.interfaces import IImage
     from plone.app.contenttypes.interfaces import IFile
     HAS_PAC = True
-except:
+except ImportError:
     HAS_PAC = False
+
+from collective.zipfiletransport import logger
 
 
 class ZipFileTransportUtility(SimpleItem):
@@ -89,8 +91,9 @@ class ZipFileTransportUtility(SimpleItem):
             within a ZODB hierarchy.
         """
         self.bad_folders = []
-        zf=ZipFile(file, 'r')
-        files = [file.filename for file in zf.filelist]
+        zipfile_props = getToolByName(context, 'portal_properties').zipfile_properties
+        zf = ZipFile(file, 'r', allowZip64=zipfile_props.allow_zip64)
+        files = [f.filename for f in zf.filelist]
 
         if len(files) < 1:
             return ('failure','The zip file was empty')
@@ -132,19 +135,19 @@ class ZipFileTransportUtility(SimpleItem):
 
                 obj = self._createObject(normalized_file_name, fdata, folder)
 
-                if hasattr(obj,'description') and description:
+                if hasattr(obj, 'description') and description:
                     obj.setDescription(description)
-                if hasattr(obj,'contributors') and contributors:
+                if hasattr(obj, 'contributors') and contributors:
                     obj.setContributors(contributors)
-                if hasattr(obj,'subject') and categories:
+                if hasattr(obj, 'subject') and categories:
                     obj.setSubject(categories)
                 if excludefromnav:
                     obj.setExcludeFromNav(True)
                 obj.reindexObject()
-		obj.setTitle(file_name)
+                obj.setTitle(file_name)
                 obj.reindexObject()
-        zf.close()
 
+        zf.close()
 
     def _checkFilePath(self, current_file, path_as_list):
         """ Make sure file isn't in a bad folder, if it is skip to the next
@@ -155,7 +158,6 @@ class ZipFileTransportUtility(SimpleItem):
                 return False
         return True
 
-
     def _createFolderStructure(self, path_as_list, parent, excludefromnav):
         """ Creates the folder structure given a path_part and parent object
         """
@@ -165,10 +167,10 @@ class ZipFileTransportUtility(SimpleItem):
         factory = getToolByName(parent, 'portal_factory')
 
         file_name = self._convertToUnicode(path_as_list[-1])
-        file_name = unicodedata.normalize('NFC', file_name )
+        file_name = unicodedata.normalize('NFC', file_name)
 
         # Create the folder structure
-        for i in range( len(path_as_list) - 1 ):
+        for i in range(len(path_as_list) - 1):
             path_part = self._convertToUnicode(path_as_list[i])
             path_part = unicodedata.normalize('NFC', path_part)
             normalized_path_part = \
@@ -195,7 +197,6 @@ class ZipFileTransportUtility(SimpleItem):
 
             parent = foldr
         return parent
-
 
     def _createObject(self, filepath, fdata, parent):
         """ """
@@ -237,7 +238,7 @@ class ZipFileTransportUtility(SimpleItem):
             if not isinstance(filename, unicode):
                 try:
                     filename = filename.decode('utf-8', 'ignore')
-                except:
+                except UnicodeError:
                     filename = 'image'
             try:
                 obj.setImage(fdata)
@@ -270,7 +271,6 @@ class ZipFileTransportUtility(SimpleItem):
         catalog.reindexObject(obj, catalog.indexes())
         return obj
 
-
     def _getFileObjectType(self, major, mimetype):
         """ """
         props = getToolByName(getSite(), 'portal_properties')
@@ -286,7 +286,6 @@ class ZipFileTransportUtility(SimpleItem):
         else:
             type = file_type
         return type
-
 
     def getTime(self,id):
         """ Returns the gmtime appended to the an id, used to obtain a unique
@@ -305,7 +304,6 @@ class ZipFileTransportUtility(SimpleItem):
     # obj_paths - Refers to a list of paths of either objects or contexts
     #               that will be included in the zip file.
     # filename - Refers to the fullpath filename of the exported zip file.
-
 
     def exportContent(self, context, obj_paths=None, filename=None):
         """ Export content to a zip file.
@@ -362,14 +360,14 @@ class ZipFileTransportUtility(SimpleItem):
         """
         props = getToolByName(context, 'portal_properties')
         nameByTitle = props.zipfile_properties.name_by_title
-
+        allow_zip64 = props.zipfile_properties.allow_zip64
         # Use temporary IO object instead of writing to filesystem.
         if tmp:
             fd, path = tempfile.mkstemp('.zipfiletransport')
             tfile = path
             close(fd)
 
-        zipFile =  ZipFile(tfile, 'w', ZIP_DEFLATED)
+        zipFile = ZipFile(tfile, 'w', ZIP_DEFLATED, allowZip64=allow_zip64)
         context_path = str(context.virtual_url_path())
 
         for obj in objects_listing:
@@ -414,7 +412,7 @@ class ZipFileTransportUtility(SimpleItem):
 
                 object_path = object_path.replace(context_path + '/', '')
 
-            elif self._objImplementsInterface(obj,interfaces.IATFolder):
+            elif self._objImplementsInterface(obj, interfaces.IATFolder):
                 if hasattr(obj, 'getRawText'):
                     file_data = obj.getRawText()
 
@@ -472,7 +470,6 @@ class ZipFileTransportUtility(SimpleItem):
             tfile = ''
         return tfile
 
-
     def _objImplementsInterface(self, obj, interfaceClass):
         """ Return boolean indicating if obj implements the given interface.
         """
@@ -486,7 +483,6 @@ class ZipFileTransportUtility(SimpleItem):
         if interfaceClass in self._tupleTreeToList(obj.__implements__):
             return True
 
-
     def _tupleTreeToList(self, t, lsa=None):
         """Convert an instance, or tree of tuples, into list."""
         import types
@@ -497,7 +493,6 @@ class ZipFileTransportUtility(SimpleItem):
         else:
             lsa.append(t)
         return lsa
-
 
     def _appendItemsToList(self, folder, list, state):
         """ """
@@ -517,7 +512,6 @@ class ZipFileTransportUtility(SimpleItem):
 
         return list
 
-
     def _convertToUnicode(self, bytestring):
         """ Convert bytestring into unicode object
         """
@@ -536,21 +530,25 @@ class ZipFileTransportUtility(SimpleItem):
     #
     #
     def getZipFilenames(self, zfile):
-         """ Gets a list of filenames in the Zip archive."""
-         try:
-             f = ZipFile(zfile)
-         except error:
-             return []
-         if f:
-             return f.namelist()
-         else:
+        """ Gets a list of filenames in the Zip archive."""
+        zipfile_props = getToolByName(self, 'portal_properties').zipfile_properties
+
+        try:
+           f = ZipFile(zfile, allowZip64=zipfile_props.allow_zip64)
+        except Exception:
+            logger.error("Couldn't create zipfile")
+            return []
+        if f:
+            return f.namelist()
+        else:
              return []
 
     def getZipFileInfo(self, zfile):
          """ Gets info about the files in a Zip archive.
          """
          mt = self.mimetypes_registry
-         f = ZipFile(zfile)
+         zipfile_props = getToolByName(self, 'portal_properties').zipfile_properties
+         f = ZipFile(zfile, allowZip64=zipfile_props)
          fileinfo = []
          for x in f.infolist():
              fileinfo.append((x.filename,
@@ -559,10 +557,11 @@ class ZipFileTransportUtility(SimpleItem):
          return fileinfo
 
     def getZipFile(self, zfile, filename):
-	""" Gets a file from the Zip archive.
+        """ Gets a file from the Zip archive.
         """
         mt = self.mimetypes_registry
-        f = ZipFile(zfile)
+        zipfile_props = getToolByName(self, 'portal_properties').zipfile_properties
+        f = ZipFile(zfile, allowZip64=zipfile_props)
         finfo = f.getinfo(filename)
         fn = split(finfo.filename)[1] # Get the file name
         path = fn.replace('\\', '/')
@@ -579,7 +578,6 @@ class ZipFileTransportUtility(SimpleItem):
             mimetype = ftype.normalized()
         fdata = f.read(filename)
         return 'file', fn, fp, major, mimetype, finfo.file_size, fdata
-
 
     def get_zipfile_name(self):
         return 'Test.zip'

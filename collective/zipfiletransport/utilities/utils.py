@@ -45,7 +45,6 @@ from plone.i18n.normalizer.interfaces import IURLNormalizer
 from zipfile import ZipFile, ZIP_DEFLATED
 from interfaces import IZipFileTransportUtility
 
-
 from tempfile import TemporaryFile
 try:
     from plone.namedfile.file import NamedBlobImage
@@ -96,7 +95,7 @@ class ZipFileTransportUtility(SimpleItem):
         files = [f.filename for f in zf.filelist]
 
         if len(files) < 1:
-            return ('failure','The zip file was empty')
+            return ('failure', 'The zip file was empty')
 
         for current_file in files:
             # If the current file is a folder move to the next file.
@@ -166,9 +165,6 @@ class ZipFileTransportUtility(SimpleItem):
         catalog = getToolByName(parent, 'portal_catalog')
         factory = getToolByName(parent, 'portal_factory')
 
-        file_name = self._convertToUnicode(path_as_list[-1])
-        file_name = unicodedata.normalize('NFC', file_name)
-
         # Create the folder structure
         for i in range(len(path_as_list) - 1):
             path_part = self._convertToUnicode(path_as_list[i])
@@ -204,7 +200,6 @@ class ZipFileTransportUtility(SimpleItem):
         image_type = props.zipfile_properties.image_type
         file_type = props.zipfile_properties.file_type
         doc_type = props.zipfile_properties.doc_type
-        folder_type = props.zipfile_properties.folder_type
 
         mt = parent.mimetypes_registry
 
@@ -277,7 +272,6 @@ class ZipFileTransportUtility(SimpleItem):
         image_type = props.zipfile_properties.image_type
         file_type = props.zipfile_properties.file_type
         doc_type = props.zipfile_properties.doc_type
-        folder_type = props.zipfile_properties.folder_type
 
         if 'image' == major:
             type = image_type
@@ -326,7 +320,7 @@ class ZipFileTransportUtility(SimpleItem):
         """ Create a list of objects by iteratively descending a folder
             tree... or trees (if obj_paths is set).
         """
-        objects_list=[]
+        objects_list = []
 
         if obj_paths:
             portal = getToolByName(context, 'portal_url').getPortalObject()
@@ -335,7 +329,7 @@ class ZipFileTransportUtility(SimpleItem):
                 # if this is a folder, then add everything in this folder to
                 # the obj_paths list otherwise simply add the object.
                 if obj.isPrincipiaFolderish:
-                    self._appendItemsToList(folder=obj, list=objects_list,state=state)
+                    self._appendItemsToList(folder=obj, list=objects_list, state=state)
                 elif obj not in objects_list:
                     if state:
                         if obj.portal_workflow.getInfoFor(obj,'review_state') in state:
@@ -344,7 +338,7 @@ class ZipFileTransportUtility(SimpleItem):
                         objects_list.append(obj)
         else:
             #create a list of the objects that are contained by the context
-            self._appendItemsToList(folder=context, list=objects_list,state=state)
+            self._appendItemsToList(folder=context, list=objects_list, state=state)
 
         return objects_list
 
@@ -544,17 +538,17 @@ class ZipFileTransportUtility(SimpleItem):
              return []
 
     def getZipFileInfo(self, zfile):
-         """ Gets info about the files in a Zip archive.
-         """
-         mt = self.mimetypes_registry
-         zipfile_props = getToolByName(self, 'portal_properties').zipfile_properties
-         f = ZipFile(zfile, allowZip64=zipfile_props)
-         fileinfo = []
-         for x in f.infolist():
-             fileinfo.append((x.filename,
-                              mt.lookupExtension(x.filename).normalized(),
-                              x.file_size))
-         return fileinfo
+        """ Gets info about the files in a Zip archive.
+        """
+        mt = self.mimetypes_registry
+        zipfile_props = getToolByName(self, 'portal_properties').zipfile_properties
+        f = ZipFile(zfile, allowZip64=zipfile_props)
+        fileinfo = []
+        for x in f.infolist():
+            fileinfo.append((x.filename,
+                             mt.lookupExtension(x.filename).normalized(),
+                             x.file_size))
+        return fileinfo
 
     def getZipFile(self, zfile, filename):
         """ Gets a file from the Zip archive.
@@ -565,7 +559,7 @@ class ZipFileTransportUtility(SimpleItem):
         finfo = f.getinfo(filename)
         fn = split(finfo.filename)[1] # Get the file name
         path = fn.replace('\\', '/')
-        fp = path.split('/') # Split the file path into a list
+        fp = path.split('/')  # Split the file path into a list
 
         if '' == fn:
             return 'dir', fn, fp, None, None, 0, None

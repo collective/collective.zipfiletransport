@@ -18,8 +18,8 @@
 #
 ##################################################################################
 
-__author__  = '''Brent Lambert, David Ray, Jon Thomas'''
-__version__   = '$ Revision 0.0 $'[11:-2]
+__author__ = '''Brent Lambert, David Ray, Jon Thomas'''
+__version__ = '$ Revision 0.0 $'[11:-2]
 import logging
 
 from zope.formlib.form import FormFields, action
@@ -34,12 +34,13 @@ from collective.zipfiletransport.utilities.interfaces import IZipFileTransportUt
 from collective.zipfiletransport.browser.interfaces import IExport
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
 
+
 class ExportFormAdapter(object):
     """ Adapter for the export form """
 
     implements(IExport)
 
-    def __init__(self,context):
+    def __init__(self, context):
         self.context = context
 
     def get_zipfile_name(self):
@@ -62,14 +63,12 @@ class ExportForm(EditForm):
     label = _(u'Export Content')
     description = _(u'All files in the folder will be exported in .zip file format')
 
-
     def __init__(self, context, request):
         self.context = context
         self.request = request
         self.zft_util = getUtility(
                             IZipFileTransportUtility,
                             name="zipfiletransport")
-
 
     @action(_(u'Export'))
     def action_export(self, action, data):
@@ -84,7 +83,7 @@ class ExportForm(EditForm):
             for x in paths:
                 x = x.encode('utf-8')
                 obj_paths += [x]
-        except:
+        except Exception:
             pass
 
         filename = self.context.REQUEST['form.filename']
@@ -92,7 +91,7 @@ class ExportForm(EditForm):
         if filename.find('.zip') == -1:
             filename += ".zip"
 
-        ## Why ? 
+        ## Why ?
         #if self.context.portal_membership.isAnonymousUser() != 0:
         #    return
         ## XX should use a permission
@@ -131,4 +130,3 @@ class ExportForm(EditForm):
             os.unlink(zip_path)
         except Exception, e:
             logger.warning('Cannot remove %s: %s' %(zip_path, e))
-        return

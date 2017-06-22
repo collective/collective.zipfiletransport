@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="ZipFileTransport">
+
+  <adapter factory=".zipexport.ExportFormAdapter"
+           for="plone.app.contenttypes.interfaces.ICollection"/>
+  <class class="plone.app.contenttypes.content.Collection">
+    <implements
+        interface="collective.zipfiletransport.interfaces.IZipfileNotImportable"/>
+  </class>
+</configure>
+

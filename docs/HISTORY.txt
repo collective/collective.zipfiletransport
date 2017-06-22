@@ -2,8 +2,11 @@ Changelog
 =========
 
 
-3.2.5 (Unreleased)
+3.3.0 (Unreleased)
 ------------------
+
+ * We can export new style collections.
+   [thomasdesvenain]
 
  * We can activate zip64 for large size zip files.
    [mvaled, thomasdesvenain]

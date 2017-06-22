@@ -21,6 +21,7 @@
 __author__ = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__ = '$ Revision 0.0 $'[11:-2]
 
+from types import NoneType
 import unicodedata
 from os import close
 import tempfile
@@ -33,6 +34,11 @@ try:
     from zope.site.hooks import getSite
 except ImportError:
     from zope.app.component.hooks import getSite
+
+try:
+    from plone.app.contenttypes.content import Collection
+except ImportError:
+    Collection = NoneType
 
 from OFS.SimpleItem import SimpleItem
 
@@ -490,21 +496,27 @@ class ZipFileTransportUtility(SimpleItem):
 
     def _appendItemsToList(self, folder, list, state):
         """ """
-        brains = folder.portal_catalog.searchResults(
-                    path={'query':('/'.join(folder.getPhysicalPath())),}
-                    )
-
-        for brain_object in brains:
+        wtool = getToolByName(folder, 'portal_workflow')
+        for brain_object in self._get_brains(folder):
             obj = brain_object.getObject()
 
             if not (obj in list or obj.isPrincipiaFolderish):
                 if state:
-                    if obj.portal_workflow.getInfoFor(obj,'review_state') in state:
+                    if wtool.getInfoFor(obj, 'review_state') in state:
                         list.append(obj)
                 else:
                     list.append(obj)
 
         return list
+
+    @staticmethod
+    def _get_brains(content):
+        if isinstance(content, Collection):
+            return content.queryCatalog(batch=False)
+        else:
+            return content.portal_catalog.searchResults(
+                        path={'query': '/'.join(content.getPhysicalPath())}
+                        )
 
     def _convertToUnicode(self, bytestring):
         """ Convert bytestring into unicode object

@@ -1,7 +1,10 @@
 <tal:block tal:define="paths request/paths|nothing ">
 
-<p tal:condition="python:not paths" i18n:translate="">
+<p tal:condition="python:not paths and context.portal_type != 'Collection'" i18n:translate="">
   All files in the folder will be exported in .zip file format.
+</p>
+<p tal:condition="python:not paths and context.portal_type == 'Collection'" i18n:translate="">
+  All files in the collection will be exported in .zip file format.
 </p>
 <tal:block tal:condition="python: paths">
  <p i18n:translate="">The following files will be exported in .zip file format:</p>

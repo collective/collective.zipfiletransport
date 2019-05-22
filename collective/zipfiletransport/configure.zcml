@@ -28,6 +28,15 @@
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     />
 
+  <genericsetup:registerProfile
+    name="uninstall"
+    title="Uninstall ZipFileTransport"
+    directory="profiles/uninstall"
+    description="Extension profile for ZipFileTransport"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    post_handler=".setuphandlers.uninstall"
+    />
 
   <genericsetup:upgradeStep
       title="Upgrade step for collective.zipfiletransport to 101"

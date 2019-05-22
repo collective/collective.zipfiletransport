@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+  <object name="zipfile_properties" meta_type="Plone Property Sheet" remove="true">
+    <property remove="true" name="title">Zip File Tool</property>
+    <property remove="true" name="image_type" type="string">Image</property>
+    <property remove="true" name="file_type" type="string">File</property>
+    <property remove="true" name="doc_type" type="string">Document</property>
+    <property remove="true" name="folder_type" type="string">Folder</property>
+    <property remove="true" name="name_by_title" type="boolean">false</property>
+    <property remove="true" name="allow_zip64" type="boolean">false</property>
+  </object>
+</object>

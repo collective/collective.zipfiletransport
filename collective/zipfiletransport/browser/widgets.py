@@ -20,22 +20,28 @@
 
 __author__  = '''Brent Lambert, David Ray, Jon Thomas'''
 __version__   = '$ Revision 0.0 $'[11:-2]
-
+from Products.Five import BrowserView
 from zope.app.form.browser.textwidgets import TextWidget
+from collective.zipfiletransport.browser.interfaces import IExport
+
+
+class ExportWidgetExtension(BrowserView):
+
+    def __init__(self, context, request):
+        BrowserView.__init__(self, context, request)
+        self.description = IExport(self.context).description
+
 
 class ExportWidget(TextWidget):
     """ Widget for Export Form. """
+    description = ""
 
     def __init__(self, field, request):
         """ Initialize the widget.  """
         super(ExportWidget, self).__init__(field, request)
 
-
     def __call__(self):
         widgettext = TextWidget.__call__(self)
-        widgettext += self.context.context.context.restrictedTraverse('@@export_widget')()
+        widget_extension = self.context.context.context.restrictedTraverse('@@export_widget')
+        widgettext += widget_extension()
         return widgettext
-
-
-
-

@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 import os
+from zipfile import ZipFile
 
 from zope import component
 from collective.zipfiletransport.tests.base import TestCase
+from collective.zipfiletransport.browser.interfaces import IExport
 from collective.zipfiletransport.utilities.interfaces import \
     IZipFileTransportUtility
+
 
 class TestZipfiletransportUtility(TestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
-
-    def test_import(self):
         self.zft_util = component.getUtility(
                             IZipFileTransportUtility,
                             name="zipfiletransport")
+
+    def test_import(self):
 
         file = os.path.join(os.path.dirname(__file__), 'test_folder.zip')
 
@@ -44,12 +47,10 @@ class TestZipfiletransportUtility(TestCase):
                 'test_document.pdf', 'test_document.odt', ]
         self.assertEquals(zip_folder.objectIds(), zip_folder_contents)
 
-
         # Test that the categories were applied
         for oid  in zip_folder_contents:
             self.assertEquals(zip_folder[oid].Subject(),
                               ('testing', 'zipfileimport'))
-
 
         # Import again with new properties but with overwrite=False
         self.zft_util.importContent(
@@ -94,24 +95,19 @@ class TestZipfiletransportUtility(TestCase):
                               ('testing', 'zipfileimport', 'new category'))
             self.assertEquals(zip_folder[oid].getExcludeFromNav(), True)
 
-
     def test_export(self):
-        self.zft_util = component.getUtility(
-                            IZipFileTransportUtility,
-                            name="zipfiletransport")
+        self.folder.invokeFactory(
+            'File',
+            'test-file.zip',
+            file=open(os.path.join(os.path.dirname(__file__), 'test_folder.zip')),
+        )
 
         obj_paths = ['/'.join(self.folder.getPhysicalPath())]
-        zip_path = self.zft_util.exportContent(self.folder, obj_paths)
-        fp = open(zip_path, 'rb')
 
-        # XXX: Add additional tests...
-        # Only works in Plone4
-        # self.assertEquals(fp.errors, None)
+        brains = IExport(self.folder).get_brains()
 
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestZipfiletransportUtility))
-    return suite
-
+        zip_path = self.zft_util.exportContent(self.folder, brains, obj_paths)
+        with open(zip_path, 'rb') as fp:
+            with ZipFile(fp, mode='r') as zip_file:
+                self.assertIn('test-file.zip', zip_file.namelist())
+                self.assertEqual(zip_file.infolist()[0].file_size, 78331)

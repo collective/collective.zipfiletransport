@@ -56,9 +56,10 @@ class IZipFileTransportUtility(Interface):
     # Export content to a zip file.
     #
     # context - Container refers to the container of all the objects that are to be exported.
+    # brains - the list of brains to export
     # obj_paths - Refers to a list of paths of either objects or contexts that will be included in the zip file.
     # filename - Refers to the fullpath filename of the exported zip file.
-    def exportContent(self, context, obj_paths=None, filename=None):
+    def exportContent(self, context, brains, obj_paths=None, filename=None):
         """
         Export content to a zip file.
         """

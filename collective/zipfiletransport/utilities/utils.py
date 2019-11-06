@@ -305,29 +305,28 @@ class ZipFileTransportUtility(SimpleItem):
     #               that will be included in the zip file.
     # filename - Refers to the fullpath filename of the exported zip file.
 
-    def exportContent(self, context, obj_paths=None, filename=None):
+    def exportContent(self, context, brains, obj_paths=None, filename=None):
         """ Export content to a zip file.
         """
-        objects_list = self._createObjectList(context, obj_paths)
+        objects_list = self._createObjectList(context, brains, obj_paths=obj_paths)
         zip_path = self._getAllObjectsData(context, objects_list, filename, tmp=True)
         return zip_path
 
-    def exportContentInTempFile(self, context, obj_paths=None, filename=None):
+    def exportContentInTempFile(self, context, brains, obj_paths=None, filename=None):
         """ Export content to a zip file.
         """
-        objects_list = self._createObjectList(context, obj_paths)
+        objects_list = self._createObjectList(context, obj_paths, brains)
         tfile = TemporaryFile()
         self._getAllObjectsData(context, objects_list, tfile)
         size = tfile.tell()
         tfile.seek(0)
         return tfile, size
 
-    def _createObjectList(self, context, obj_paths=None, state=None):
+    def _createObjectList(self, context, brains, obj_paths=None, state=None):
         """ Create a list of objects by iteratively descending a folder
-            tree... or trees (if obj_paths is set).
+           tree... or trees (if obj_paths is set).
         """
-        objects_list=[]
-
+        objects_list = []
         if obj_paths:
             portal = getToolByName(context, 'portal_url').getPortalObject()
             for path in obj_paths:
@@ -335,16 +334,16 @@ class ZipFileTransportUtility(SimpleItem):
                 # if this is a folder, then add everything in this folder to
                 # the obj_paths list otherwise simply add the object.
                 if obj.isPrincipiaFolderish:
-                    self._appendItemsToList(folder=obj, list=objects_list,state=state)
+                    self._appendItemsToList(list=objects_list, state=state, brains=brains)
                 elif obj not in objects_list:
                     if state:
-                        if obj.portal_workflow.getInfoFor(obj,'review_state') in state:
+                        if obj.portal_workflow.getInfoFor(obj, 'review_state') in state:
                             objects_list.append(obj)
                     else:
                         objects_list.append(obj)
         else:
-            #create a list of the objects that are contained by the context
-            self._appendItemsToList(folder=context, list=objects_list,state=state)
+            # create a list of the objects that are contained by the context
+            self._appendItemsToList(list=objects_list, brains=brains, state=state)
 
         return objects_list
 
@@ -494,11 +493,8 @@ class ZipFileTransportUtility(SimpleItem):
             lsa.append(t)
         return lsa
 
-    def _appendItemsToList(self, folder, list, state):
+    def _appendItemsToList(self, list, state, brains):
         """ """
-        brains = folder.portal_catalog.searchResults(
-                    path={'query':('/'.join(folder.getPhysicalPath())),}
-                    )
 
         for brain_object in brains:
             obj = brain_object.getObject()

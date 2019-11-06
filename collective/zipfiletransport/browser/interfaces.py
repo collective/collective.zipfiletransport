@@ -18,19 +18,29 @@
 #
 ##################################################################################
 
-__author__  = '''Brent Lambert, David Ray, Jon Thomas'''
-__version__   = '$ Revision 0.0 $'[11:-2]
+__author__ = '''Brent Lambert, David Ray, Jon Thomas'''
+__version__  = '$ Revision 0.0 $'[11:-2]
 
-from zope.interface import Interface
-from zope import schema
-from collective.zipfiletransport.schemas import ZipFileLine
 from collective.zipfiletransport import ZipFileTransportMessageFactory as _
+from collective.zipfiletransport.schemas import ZipFileLine
+
+from zope import schema
+from zope.interface import Interface
+
 
 class IExport(Interface):
     """ Export Form """
-    filename = schema.TextLine(title=_(u"Zip File Export"),
-                           description=_(u"The name of the file downloaded to your local machine."),
-                           required=True)
+    filename = schema.TextLine(
+        title=_(u"Zip File Export"),
+        description=_(u"The name of the file downloaded to your local machine."),
+        required=True)
+
+    def get_brains(self):
+        """
+        The list of brains to export
+        :return:
+        """
+
 
 class IImport(Interface):
     """ Import Form """
@@ -80,4 +90,3 @@ class IImport(Interface):
                         description=_(
                             u"Select the ZIP archive file to be imported."),
                         required=True)
-

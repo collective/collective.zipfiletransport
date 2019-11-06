@@ -2,8 +2,13 @@ Changelog
 =========
 
 
-3.2.5 (Unreleased)
-------------------
+3.3 (Unreleased)
+----------------
+
+ * We can export the files of a topic.
+   API CHANGES: `exportContent` now takes a list of brains, and `IExport` adapter declares the way we get those brains.
+   This is implemented for folders and topics.
+   [thomasdesvenain]
 
  * We can activate zip64 for large size zip files.
    [mvaled, thomasdesvenain]
